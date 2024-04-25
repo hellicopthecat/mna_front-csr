@@ -15,6 +15,7 @@ const ShareBtn = styled.button`
   height: 50px;
   text-align: center;
   border-radius: 20px;
+  font-size: 18px;
 `;
 export const BtnTheme = ({type = "button", handleClick, text}: IBtnProps) => {
   return (
@@ -37,6 +38,7 @@ const ShareBtnAnchor = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 18px;
 `;
 export const AnchorTheme = ({href, text}: IAnchorProps) => {
   return <ShareBtnAnchor to={href}>{text}</ShareBtnAnchor>;
