@@ -2,14 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import {ApolloProvider} from "@apollo/client";
 import client from "./libs/apollo-client.ts";
+import {Provider} from "react-redux";
 
-import router from "./router.tsx";
-import {RouterProvider} from "react-router-dom";
+import App from "./App.tsx";
+import store from "./store.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ApolloProvider>
   </React.StrictMode>
 );
