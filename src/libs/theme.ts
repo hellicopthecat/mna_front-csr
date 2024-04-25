@@ -5,11 +5,11 @@ export const dark: DefaultTheme = {
   txtColor: "#ffffff",
   btnColor: "#ff6f00",
   btnTxtColor: "#ffffff",
-  primary: "##ffcc00",
+  primary: "#ffcc00",
   secondary: "#4db8ff",
 };
 export const light: DefaultTheme = {
-  bgColor: "#ffffff",
+  bgColor: "#f1f1f1f1",
   txtColor: "#333333",
   btnColor: "#2196f3",
   btnTxtColor: "#ffffff",
