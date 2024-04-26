@@ -31,5 +31,6 @@ export const Icon = styled.svg<{$icon?: number}>`
       ? "orange"
       : props.$icon === 2
       ? "cornflowerblue"
-      : props.theme.txtColor};
+      : props.theme.secondary};
+  cursor: pointer;
 `;
