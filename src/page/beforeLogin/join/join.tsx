@@ -5,8 +5,14 @@ import Container from "../../../components/container";
 import {IJoinFormProps} from "../../../types/types";
 import {JoinWrapper} from "./join.style";
 import useJoinUser from "./joinHook";
+import {useEffect} from "react";
+import useUser from "../../../hooks/useUser";
+import {useNavigate} from "react-router-dom";
 
 const Join = () => {
+  // custom hook
+  const navigate = useNavigate();
+  const {data} = useUser();
   //form
   const {
     register,
@@ -56,6 +62,11 @@ const Join = () => {
       phone: "",
     });
   };
+  useEffect(() => {
+    if (data) {
+      navigate("/");
+    }
+  }, [data, navigate]);
   return (
     <Container>
       <JoinWrapper>

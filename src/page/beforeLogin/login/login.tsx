@@ -11,19 +11,22 @@ import useLoginMutate from "./loginHook";
 
 import AuthInput from "../../../components/auth/authInput";
 import {ILoginFormProps} from "../../../types/types";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../hooks/storeHook";
 import {setTrue, setfalse} from "../../../redux/loginTypeSlice";
+import useUser from "../../../hooks/useUser";
+import {useEffect} from "react";
 
 const Login = () => {
+  //other hooks
+  const {data} = useUser();
+  const navigate = useNavigate();
+  const locate = useLocation();
   //state
   const isSelected = useAppSelector((state) =>
     state.isSelect.isSelect.valueOf()
   );
   const dispatch = useAppDispatch();
-
-  //other hooks
-  const locate = useLocation();
   //form
   const {
     register,
@@ -52,6 +55,11 @@ const Login = () => {
       reset({username: "", email: "", password: ""});
     }
   };
+  useEffect(() => {
+    if (data) {
+      navigate("/");
+    }
+  }, [data, navigate]);
 
   return (
     <Container>
