@@ -1,8 +1,9 @@
-import {gql, useQuery} from "@apollo/client";
+import {DocumentNode, TypedDocumentNode, gql, useQuery} from "@apollo/client";
 import {useAppDispatch, useAppSelector} from "./storeHook";
 import {useEffect} from "react";
 import {removeToken} from "../redux/tokenSlice";
 import {useNavigate} from "react-router-dom";
+import {Query} from "../libs/__generated__/graphql";
 
 const IS_ME_QUERY = gql`
   query SeeMyprofile {
@@ -17,15 +18,14 @@ const IS_ME_QUERY = gql`
       phone
     }
   }
-`;
+` as DocumentNode | TypedDocumentNode<Query>;
 const useUser = () => {
   const navigate = useNavigate();
   const token = useAppSelector((state) => state.token.token);
   const dispatch = useAppDispatch();
   const {data, error, loading} = useQuery(IS_ME_QUERY, {skip: !token});
-  console.log(data);
   useEffect(() => {
-    if (data === undefined) {
+    if (!data && error) {
       dispatch(removeToken());
       navigate("/");
       window.location.reload();
