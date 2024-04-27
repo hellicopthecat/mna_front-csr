@@ -11,6 +11,7 @@ import useUser from "../../../hooks/useUser";
 import {useAppDispatch, useAppSelector} from "../../../hooks/storeHook";
 import {setDark, setLight} from "../../../redux/themeSlice";
 import {removeToken} from "../../../redux/tokenSlice";
+import {activeNav} from "../../../redux/navSlice";
 
 const HeaderComp = () => {
   //custom hook
@@ -23,6 +24,21 @@ const HeaderComp = () => {
   return (
     <HeaderWrapper>
       <HeaderLeft>
+        <Icon
+          fill="none"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          onClick={() => dispatch(activeNav())}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+          />
+        </Icon>
         <Link to={urlName.home}>
           <h1>CON.COM</h1>
         </Link>

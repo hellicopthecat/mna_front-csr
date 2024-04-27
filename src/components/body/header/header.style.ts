@@ -10,6 +10,16 @@ export const HeaderWrapper = styled.header`
 `;
 export const HeaderLeft = styled.div`
   display: flex;
+  align-items: center;
+  svg {
+    margin-right: 30px;
+  }
+  a {
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 600;
+  }
 `;
 export const HeaderRight = styled.div`
   display: flex;

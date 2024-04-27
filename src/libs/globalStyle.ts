@@ -19,9 +19,12 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	vertical-align: baseline;
+	vertical-align:baseline;
 }
 /* HTML5 display-role reset for older browsers */
+*{
+	box-sizing:border-box;
+}
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
