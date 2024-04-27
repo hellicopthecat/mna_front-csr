@@ -3,8 +3,6 @@ import {EQUITY_LIABILITIES_FRAG} from "./equityLiabilitiesFrag";
 import {INCOME_EXPEND_FRAG} from "./incomeExpendFrag";
 
 export const INNOUT_FRAG: DocumentNode = gql`
-  ${EQUITY_LIABILITIES_FRAG}
-  ${INCOME_EXPEND_FRAG}
   fragment InNoutFrag on InNout {
     id
     createdAt
@@ -15,23 +13,23 @@ export const INNOUT_FRAG: DocumentNode = gql`
     accountDesc
     totalAssets
     totalAssetsDesc {
-      ...EQUITY_LIABILITIES_FRAG
+      ...EquityLiabilitiesFrag
     }
     currentAssets
     currentAssetsDesc {
-      ...EQUITY_LIABILITIES_FRAG
+      ...EquityLiabilitiesFrag
     }
     nonCurrentAssets
     nonCurrentAssetsDesc {
-      ...EQUITY_LIABILITIES_FRAG
+      ...EquityLiabilitiesFrag
     }
     currentLiabilities
     currentLiabilitiesDesc {
-      ...EQUITY_LIABILITIES_FRAG
+      ...EquityLiabilitiesFrag
     }
     nonCurrentLiabilities
     nonCurrentLiabilitiesDesc {
-      ...EQUITY_LIABILITIES_FRAG
+      ...EquityLiabilitiesFrag
     }
     capital
     liabilities
@@ -44,12 +42,14 @@ export const INNOUT_FRAG: DocumentNode = gql`
     debtRatio
     roe
     incomeModel {
-      ...INCOME_EXPEND_FRAG
+      ...IncomeExpendFrag
     }
     incomeMoney
     expendModel {
-      ...INCOME_EXPEND_FRAG
+      ...IncomeExpendFrag
     }
     expendMoney
   }
+  ${EQUITY_LIABILITIES_FRAG}
+  ${INCOME_EXPEND_FRAG}
 `;

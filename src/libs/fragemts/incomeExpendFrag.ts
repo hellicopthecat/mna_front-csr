@@ -1,16 +1,14 @@
-import {gql} from "@apollo/client";
+import {DocumentNode, gql} from "@apollo/client";
 import {PRODUCT_FRAG} from "./productFrag";
 import {INNOUT_FRAG} from "./inNoutFrag";
 
-export const INCOME_EXPEND_FRAG = gql`
-  ${PRODUCT_FRAG}
-  ${INNOUT_FRAG}
+export const INCOME_EXPEND_FRAG: DocumentNode = gql`
   fragment IncomeExpendFrag on IncomeExpend {
     id
     createdAt
     updateAt
     productItem {
-      ...PRODUCT_FRAG
+      ...ProductFrag
     }
     incomeTrue
     infoSubtitle
@@ -21,9 +19,11 @@ export const INCOME_EXPEND_FRAG = gql`
     businessDesc
     paymentsDone
     inNout {
-      ...INNOUT_FRAG
+      ...InNoutFrag
     }
     inNoutId
     productId
   }
+  ${PRODUCT_FRAG}
+  ${INNOUT_FRAG}
 `;
