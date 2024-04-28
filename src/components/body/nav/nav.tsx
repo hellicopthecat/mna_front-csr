@@ -12,6 +12,7 @@ const NavWrapper = styled.nav<{$active: boolean}>`
   position: absolute;
   transform: translateX(${(props) => (props.$active ? "0" : "-100%")});
   transition: 0.4s ease-in-out;
+  z-index: 99;
 `;
 const NavIcon = styled.svg`
   width: 25px;

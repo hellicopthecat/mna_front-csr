@@ -45,10 +45,14 @@ const HeaderComp = () => {
       </HeaderLeft>
       <HeaderRight>
         <UserInfo>
-          <div
-            style={{backgroundColor: "cornflowerblue", width: 20, height: 20}}
-          />
-          {user && <p>{user.username}</p>}
+          <Link to={`/myprofile/${user?.username}/userinfo`}>
+            <div
+              style={{backgroundColor: "cornflowerblue", width: 20, height: 20}}
+            />
+          </Link>
+          <Link to={`/myprofile/${user?.username}/userinfo`}>
+            {user && <p>{user.username}</p>}
+          </Link>
         </UserInfo>
         {!theme ? (
           <Icon

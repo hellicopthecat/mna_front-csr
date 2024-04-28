@@ -7,5 +7,7 @@ declare module "styled-components" {
     btnTxtColor: string;
     primary: string;
     secondary: string;
+    badge: string;
+    subBadge: string;
   }
 }

@@ -7,6 +7,8 @@ export const dark: DefaultTheme = {
   btnTxtColor: "#ffffff",
   primary: "#ffcc00",
   secondary: "#4db8ff",
+  badge: "#800020",
+  subBadge: "#32CD32",
 };
 export const light: DefaultTheme = {
   bgColor: "#f1f1f1f1",
@@ -15,4 +17,6 @@ export const light: DefaultTheme = {
   btnTxtColor: "#ffffff",
   primary: "#ff5722",
   secondary: "#00bcd4",
+  badge: "#E6E6FA",
+  subBadge: "#FFD700",
 };

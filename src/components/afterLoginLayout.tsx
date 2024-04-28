@@ -8,7 +8,9 @@ const AfterLoginLayoutWrapper = styled.div`
   flex-direction: column;
   position: relative;
 `;
-const AfterLoginCont = styled.main``;
+const AfterLoginCont = styled.main`
+  padding: 40px;
+`;
 const AfterLoginLayout = ({children}: {children: ReactNode}) => {
   return (
     <AfterLoginLayoutWrapper>
