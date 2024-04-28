@@ -11,6 +11,9 @@ import Login from "./page/beforeLogin/login/login.tsx";
 import Join from "./page/beforeLogin/join/join.tsx";
 import {useAppSelector} from "./hooks/storeHook.ts";
 import {urlName} from "./libs/constants.ts";
+import Myprofile from "./page/afterLogin/myprofile/myprofile.tsx";
+import UserProfileInfo from "./page/afterLogin/myprofile/userInfo/userInfo.tsx";
+import EditUser from "./page/afterLogin/myprofile/editUser/editUser.tsx";
 
 function App() {
   const {token} = useAppSelector((state) => state.token);
@@ -27,6 +30,10 @@ function App() {
             />
             <Route path={urlName.login} element={<Login />} />
             <Route path={urlName.join} element={<Join />} />
+            <Route path={urlName.myprofile} element={<Myprofile />}>
+              <Route path={"userinfo"} element={<UserProfileInfo />} />
+              <Route path={"edit"} element={<EditUser />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </Layout>
