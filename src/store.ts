@@ -3,6 +3,7 @@ import tokenSliceReducer from "./redux/tokenSlice";
 import loginTypeSliceReducer from "./redux/loginTypeSlice";
 import themeTypeSliceReducer from "./redux/themeSlice";
 import activeNavSliceReducer from "./redux/navSlice";
+import companyStateSliceReducer from "./redux/companyStateSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     isSelect: loginTypeSliceReducer,
     theme: themeTypeSliceReducer,
     activeNav: activeNavSliceReducer,
+    companyState: companyStateSliceReducer,
   },
 });
 

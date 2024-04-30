@@ -12,15 +12,17 @@ import {useAppDispatch, useAppSelector} from "../../../hooks/storeHook";
 import {setDark, setLight} from "../../../redux/themeSlice";
 import {removeToken} from "../../../redux/tokenSlice";
 import {activeNav} from "../../../redux/navSlice";
+import {Avatar} from "../../avatar";
 
 const HeaderComp = () => {
   //custom hook
+
   const {data} = useUser();
   const user = data?.seeMyprofile;
   //state
   const {theme} = useAppSelector((state) => state.theme);
+  const {companyName} = useAppSelector((state) => state.companyState);
   const dispatch = useAppDispatch();
-
   return (
     <HeaderWrapper>
       <HeaderLeft>
@@ -39,20 +41,16 @@ const HeaderComp = () => {
             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
           />
         </Icon>
-        <Link to={urlName.home}>
+        <Link to={`/company/${companyName}`}>
           <h1>CON.COM</h1>
         </Link>
       </HeaderLeft>
       <HeaderRight>
         <UserInfo>
-          <Link to={`/myprofile/${user?.username}/userinfo`}>
-            <div
-              style={{backgroundColor: "cornflowerblue", width: 20, height: 20}}
-            />
+          <Link to={urlName.home}>
+            <Avatar width="20px" height="20px" />
           </Link>
-          <Link to={`/myprofile/${user?.username}/userinfo`}>
-            {user && <p>{user.username}</p>}
-          </Link>
+          <Link to={urlName.home}>{user && <p>{user.username}</p>}</Link>
         </UserInfo>
         {!theme ? (
           <Icon

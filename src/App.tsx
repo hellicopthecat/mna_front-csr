@@ -2,11 +2,9 @@ import {ThemeProvider} from "styled-components";
 import Layout from "./components/layout.tsx";
 import GlobalStlye from "./libs/globalStyle.ts";
 import {dark, light} from "./libs/theme.ts";
-
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Preview from "./page/beforeLogin/preview/preview.tsx";
 import Home from "./page/afterLogin/home/home.tsx";
-
 import Login from "./page/beforeLogin/login/login.tsx";
 import Join from "./page/beforeLogin/join/join.tsx";
 import {useAppSelector} from "./hooks/storeHook.ts";
@@ -14,6 +12,8 @@ import {urlName} from "./libs/constants.ts";
 import Myprofile from "./page/afterLogin/myprofile/myprofile.tsx";
 import UserProfileInfo from "./page/afterLogin/myprofile/userInfo/userInfo.tsx";
 import EditUser from "./page/afterLogin/myprofile/editUser/editUser.tsx";
+import UserCompany from "./page/afterLogin/myprofile/userCompany/userCompany.tsx";
+import UserManageCompany from "./page/afterLogin/myprofile/userCompany/userManageCompany.tsx";
 
 function App() {
   const {token} = useAppSelector((state) => state.token);
@@ -26,14 +26,16 @@ function App() {
           <Routes>
             <Route
               path={urlName.home}
-              element={!token ? <Preview /> : <Home />}
-            />
+              element={!token ? <Preview /> : <Myprofile />}
+            >
+              <Route path={urlName.home} element={<UserProfileInfo />} />
+              <Route path={urlName.editUser} element={<EditUser />} />
+              <Route path={urlName.comapny} element={<UserCompany />} />
+              <Route path={urlName.manage} element={<UserManageCompany />} />
+            </Route>
             <Route path={urlName.login} element={<Login />} />
             <Route path={urlName.join} element={<Join />} />
-            <Route path={urlName.myprofile} element={<Myprofile />}>
-              <Route path={"userinfo"} element={<UserProfileInfo />} />
-              <Route path={"edit"} element={<EditUser />} />
-            </Route>
+            <Route path={urlName.detailCompany} element={<Home />} />
           </Routes>
         </BrowserRouter>
       </Layout>

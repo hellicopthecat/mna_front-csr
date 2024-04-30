@@ -9,6 +9,7 @@ export const dark: DefaultTheme = {
   secondary: "#4db8ff",
   badge: "#800020",
   subBadge: "#32CD32",
+  cardColor: "#6A5ACD",
 };
 export const light: DefaultTheme = {
   bgColor: "#f1f1f1f1",
@@ -19,4 +20,5 @@ export const light: DefaultTheme = {
   secondary: "#00bcd4",
   badge: "#E6E6FA",
   subBadge: "#FFD700",
+  cardColor: "#FF7F50",
 };

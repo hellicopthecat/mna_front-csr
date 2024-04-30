@@ -3,20 +3,54 @@ import styled from "styled-components";
 export const HomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
+  h2 {
+    font-size: 30px;
+  }
 `;
-export const CompanyWrapper = styled.div`
+
+export const CompanyInfoHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  div {
+    display: flex;
+  }
+  p {
+    display: flex;
+    font-size: 13px;
+  }
+`;
+export const CompanyInfoHeaderUp = styled.div`
+  flex-direction: column;
+  p {
+    text-align: left;
+  }
+`;
+export const CompanyInfoHeaderDown = styled.div`
+  gap: 10px;
+  p {
+    border-radius: 10px;
+    padding: 5px 10px;
+  }
+  p:nth-child(1) {
+    background-color: ${(props) => props.theme.badge};
+  }
+  p:nth-child(2) {
+    background-color: ${(props) => props.theme.subBadge};
+  }
+`;
+export const CompanyOwnerCont = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  div {
+    display: flex;
+    gap: 10px;
+  }
+`;
+export const CompanyInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  h2 {
-    font-size: 25px;
-  }
-`;
-export const CompanyCardCont = styled.div`
-  display: grid;
-  gap: 5px;
-  grid-template-columns: repeat(4, minmax(280px, 1fr));
-  padding: 0 15px;
-  overflow-y: scroll;
 `;

@@ -13,6 +13,7 @@ export const tokenSlice = createSlice({
     },
     removeToken: (state) => {
       sessionStorage.removeItem(TOKEN);
+      window.location.reload();
       state.token = false;
     },
   },

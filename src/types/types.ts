@@ -26,3 +26,12 @@ export interface IAuthInputProps {
   placeHolder: string;
   errorMsg?: string;
 }
+
+//edit User
+export interface IEditUserInputProps {
+  password?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  userId?: string;
+}

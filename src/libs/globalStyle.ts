@@ -33,6 +33,9 @@ body {
 	line-height: 1;
 	background-color: ${(props) => props.theme.bgColor};
 	color: ${(props) => props.theme.txtColor};
+	font-family: "Noto Sans KR", sans-serif;
+  	font-optical-sizing: auto;
+  	font-style: normal;
 }
 ol, ul {
 	list-style: none;

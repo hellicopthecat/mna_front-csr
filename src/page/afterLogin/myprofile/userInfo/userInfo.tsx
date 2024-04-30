@@ -1,18 +1,19 @@
+import {Avatar} from "../../../../components/avatar";
 import {AnchorTheme} from "../../../../components/btnTheme";
+import MyprofileLayout from "../../../../components/myProfile/myProfileLayout";
 import useUser from "../../../../hooks/useUser";
-import {Avatar} from "../myprofile.style";
+
 import {
   UserProfileDataBody,
   UserProfileDataBodyCont,
   UserProfileDataHead,
-  UserProfileWrapper,
 } from "./userInfo.style";
 
 const UserProfileInfo = () => {
   const {data} = useUser();
   const userData = data?.seeMyprofile;
   return (
-    <UserProfileWrapper>
+    <MyprofileLayout>
       <UserProfileDataHead>
         <Avatar />
         <h3>{userData?.username}</h3>
@@ -33,10 +34,10 @@ const UserProfileInfo = () => {
         </UserProfileDataBodyCont>
       </UserProfileDataBody>
       <AnchorTheme
-        href={`/myprofile/${userData?.username}/edit`}
+        href={`/${userData?.username}/edit`}
         text="프로필 편집하기"
       />
-    </UserProfileWrapper>
+    </MyprofileLayout>
   );
 };
 export default UserProfileInfo;

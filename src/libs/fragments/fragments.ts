@@ -19,6 +19,12 @@ export const CONNECTCOMPANY_FRAG = gql`
       companyName
     }
     connectingCompanyCount
+    companyInNout {
+      id
+      accountNum
+      budget
+      totalAssets
+    }
   }
 `;
 
@@ -31,5 +37,22 @@ export const MY_VACATION_FRAG = gql`
     restVacation
     specialVation
     sickLeave
+  }
+`;
+export const COMPANY_INNOUT_FRAG = gql`
+  fragment CompanyInNoutFrag on InNout {
+    id
+    budget
+    totalAssets
+    capital
+    liabilities
+    totalRevenue
+    totalExpenses
+    profitMargin
+    roe
+    netAssets
+    netIncome
+    debtRatio
+    equityRatio
   }
 `;

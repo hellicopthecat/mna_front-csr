@@ -1,11 +1,5 @@
 import styled from "styled-components";
 
-export const UserProfileWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 50px;
-`;
 export const UserProfileDataHead = styled.div`
   display: flex;
   flex-direction: column;

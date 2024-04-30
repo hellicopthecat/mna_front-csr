@@ -1,80 +1,121 @@
 import {DocumentNode, TypedDocumentNode, gql, useQuery} from "@apollo/client";
 import AfterLoginLayout from "../../../components/afterLoginLayout";
 import {Query} from "../../../libs/__generated__/graphql";
-import {
-  CONNECTCOMPANY_FRAG,
-  MY_VACATION_FRAG,
-} from "../../../libs/fragments/fragments";
-import {CompanyCardCont, HomeWrapper, CompanyWrapper} from "./home.style";
-import CompanyCard from "../../../components/home/companyCard";
 
-const SEE_MY_PROFILE = gql`
-  query seeMyprofile {
-    seeMyprofile {
+import {
+  HomeWrapper,
+  CompanyInfoWrapper,
+  CompanyInfoHeader,
+  CompanyOwnerCont,
+  CompanyInfoHeaderUp,
+  CompanyInfoHeaderDown,
+} from "./home.style";
+import {COMPANY_INNOUT_FRAG} from "../../../libs/fragments/fragments";
+import {useAppSelector} from "../../../hooks/storeHook";
+import CompanyInNout from "../../../components/home/companyInNout";
+import CompanyConnect, {
+  ICompanyConnect,
+} from "../../../components/home/companyConnect";
+import {Avatar} from "../../../components/avatar";
+
+const SEE_SELECTED_COMPANY = gql`
+  query searchCompany($companyName: String!) {
+    searchCompany(companyName: $companyName) {
       id
       createdAt
       updateAt
-      username
-      email
-      firstName
-      lastName
-      phone
-      ownCompany {
-        ...ConnectCompanyFrag
+      companyLogo
+      companyName
+      isManager
+      isOwned
+      companyManager {
+        id
+        username
+        email
+        phone
+        avatar
       }
-      hasCompanyCount
-      manageCompany {
-        ...ConnectCompanyFrag
+      companyOwner {
+        id
+        username
+        email
+        phone
+        avatar
       }
-      manageCompanyCount
-      vacation {
-        ...MyVacationFrag
+      connectedCompany {
+        id
+        companyName
+        companyLogo
+      }
+      connectedCompanyCount
+      connectingCompany {
+        id
+        companyName
+        companyLogo
+      }
+      connectingCompanyCount
+      companyInNout {
+        ...CompanyInNoutFrag
       }
     }
   }
-  ${CONNECTCOMPANY_FRAG}
-  ${MY_VACATION_FRAG}
+  ${COMPANY_INNOUT_FRAG}
 ` as DocumentNode | TypedDocumentNode<Query>;
 
 const Home = () => {
-  const {data, error, fetchMore} = useQuery(SEE_MY_PROFILE);
-  const userData = data?.seeMyprofile;
-
+  //redux
+  const {companyName} = useAppSelector((state) => state.companyState);
+  //gql
+  const {data, loading, error, fetchMore} = useQuery(SEE_SELECTED_COMPANY, {
+    variables: {companyName},
+  });
+  const C_DATA = data?.searchCompany;
+  console.log(C_DATA);
   return (
     <AfterLoginLayout>
       <HomeWrapper>
-        <CompanyWrapper>
-          <h2>내가 보유한 회사</h2>
-          <CompanyCardCont>
-            {userData?.ownCompany?.map((company) => (
-              <CompanyCard
-                key={company?.id}
-                companyId={company?.id + ""}
-                companyName={company?.companyName + ""}
-                connectedCount={company?.connectedCompanyCount as number}
-                connectingCount={company?.connectingCompanyCount as number}
-                isManaged={company?.isManager as boolean}
-                isOwned={company?.isOwned as boolean}
-              />
-            ))}
-          </CompanyCardCont>
-        </CompanyWrapper>
-        <CompanyWrapper>
-          <h2>내가 관리하는 회사</h2>
-          <CompanyCardCont>
-            {userData?.manageCompany?.map((managed) => (
-              <CompanyCard
-                key={managed?.id}
-                companyId={managed?.id + ""}
-                companyName={managed?.companyName + ""}
-                connectedCount={managed?.connectedCompanyCount as number}
-                connectingCount={managed?.connectingCompanyCount as number}
-                isManaged={managed?.isManager as boolean}
-                isOwned={managed?.isOwned as boolean}
-              />
-            ))}
-          </CompanyCardCont>
-        </CompanyWrapper>
+        <CompanyInfoHeader>
+          <CompanyInfoHeaderUp>
+            <p>회사명</p>
+            <h2>{C_DATA?.companyName}</h2>
+          </CompanyInfoHeaderUp>
+          <CompanyInfoHeaderDown>
+            {C_DATA?.isOwned && <p>보유</p>}
+            {C_DATA?.isManager && <p>관리자</p>}
+          </CompanyInfoHeaderDown>
+          <CompanyOwnerCont>
+            <div>
+              <Avatar width="20px" height="20px" />
+              <span>{C_DATA?.companyOwner.username}</span>
+            </div>
+            <span>|</span>
+            <div>
+              <span>E-MAIL</span>
+              <span>{C_DATA?.companyOwner.email}</span>
+            </div>
+            <span>|</span>
+            <div>
+              <span>PHONE</span>
+              <span>{C_DATA?.companyOwner.phone}</span>
+            </div>
+          </CompanyOwnerCont>
+        </CompanyInfoHeader>
+        <CompanyInfoWrapper>
+          <CompanyConnect
+            title="발주처"
+            count={C_DATA?.connectedCompanyCount as number}
+            connect={C_DATA?.connectedCompany as ICompanyConnect["connect"]}
+          />
+          <CompanyConnect
+            title="거래처"
+            count={C_DATA?.connectingCompanyCount as number}
+            connect={C_DATA?.connectingCompany as ICompanyConnect["connect"]}
+          />
+        </CompanyInfoWrapper>
+        <CompanyInfoWrapper>
+          <h2>회계</h2>
+          <CompanyInNout inNout={C_DATA?.companyInNout as object} />
+        </CompanyInfoWrapper>
       </HomeWrapper>
     </AfterLoginLayout>
   );
