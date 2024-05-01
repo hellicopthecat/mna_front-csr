@@ -29,7 +29,6 @@ const UserCompany = () => {
   const {data, loading} = useQuery(MY_COMPANY_QUERY);
   const userCompany = data?.seeMyprofile;
   const dispatch = useAppDispatch();
-
   return (
     <>
       {loading ? (
