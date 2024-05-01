@@ -20,6 +20,7 @@ const NavWrapper = styled.nav<{$active: boolean}>`
     display: flex;
     flex-direction: column;
     gap: 40px;
+    z-index: 98;
   }
   ul {
     display: flex;
@@ -39,8 +40,8 @@ const NavComp = () => {
   const {clickNav} = useAppSelector((state) => state.activeNav);
   const dispatch = useAppDispatch();
   return (
-    <NavWrapper $active={clickNav}>
-      <div>
+    <NavWrapper $active={clickNav} onClick={() => dispatch(nonActiveNav())}>
+      <div onClick={() => dispatch(nonActiveNav())}>
         <NavIcon
           fill="none"
           strokeWidth={1.5}
@@ -57,7 +58,8 @@ const NavComp = () => {
           />
         </NavIcon>
         <ul>
-          <li>회사</li>
+          <li>홈</li>
+          <li>회계</li>
           <li>제품</li>
           <li>수입 / 지출</li>
         </ul>

@@ -17,7 +17,6 @@ const AfterLoginLayout = ({children}: {children: ReactNode}) => {
       <HeaderComp />
       <NavComp />
       <AfterLoginCont>{children}</AfterLoginCont>
-      <FooterComp />
     </AfterLoginLayoutWrapper>
   );
 };

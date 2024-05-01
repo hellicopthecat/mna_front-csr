@@ -19,7 +19,7 @@ const ShareBtn = styled.button<{
   background-color: ${(props) => props.theme.btnColor};
   color: ${(props) => props.theme.btnTxtColor};
   width: ${(props) => props.$width};
-  min-width: 80px;
+  min-width: 40px;
   height: ${(props) => props.$height};
   font-size: ${(props) => props.$fontsize};
   text-align: center;
