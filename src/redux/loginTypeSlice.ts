@@ -3,14 +3,14 @@ import {createSlice} from "@reduxjs/toolkit";
 export const loginTypeSlice = createSlice({
   name: "loginType",
   initialState: {
-    isSelect: true,
+    isLoginSelect: true,
   },
   reducers: {
     setTrue: (state) => {
-      state.isSelect = true;
+      state.isLoginSelect = true;
     },
     setfalse: (state) => {
-      state.isSelect = false;
+      state.isLoginSelect = false;
     },
   },
 });

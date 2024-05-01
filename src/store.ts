@@ -8,7 +8,7 @@ import companyStateSliceReducer from "./redux/companyStateSlice";
 const store = configureStore({
   reducer: {
     token: tokenSliceReducer,
-    isSelect: loginTypeSliceReducer,
+    isLoginSelect: loginTypeSliceReducer,
     theme: themeTypeSliceReducer,
     activeNav: activeNavSliceReducer,
     companyState: companyStateSliceReducer,
