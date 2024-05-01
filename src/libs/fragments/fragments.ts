@@ -27,32 +27,3 @@ export const CONNECTCOMPANY_FRAG = gql`
     }
   }
 `;
-
-export const MY_VACATION_FRAG = gql`
-  fragment MyVacationFrag on Vacation {
-    id
-    createdAt
-    updateAt
-    totalVacation
-    restVacation
-    specialVation
-    sickLeave
-  }
-`;
-export const COMPANY_INNOUT_FRAG = gql`
-  fragment CompanyInNoutFrag on InNout {
-    id
-    budget
-    totalAssets
-    capital
-    liabilities
-    totalRevenue
-    totalExpenses
-    profitMargin
-    roe
-    netAssets
-    netIncome
-    debtRatio
-    equityRatio
-  }
-`;
