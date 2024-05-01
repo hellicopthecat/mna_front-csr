@@ -23,9 +23,7 @@ const Login = () => {
   const navigate = useNavigate();
   const locate = useLocation();
   //state
-  const isSelected = useAppSelector((state) =>
-    state.isSelect.isSelect.valueOf()
-  );
+  const {isLoginSelect} = useAppSelector((state) => state.isLoginSelect);
   const dispatch = useAppDispatch();
   //form
   const {
@@ -79,13 +77,13 @@ const Login = () => {
         <LoginTypeCont>
           <LoginTypeBtn
             onClick={() => dispatch(setTrue())}
-            $isselect={isSelected}
+            $isselect={isLoginSelect}
           >
             ID
           </LoginTypeBtn>
           <LoginTypeBtn
             onClick={() => dispatch(setfalse())}
-            $isselect={!isSelected}
+            $isselect={!isLoginSelect}
           >
             EMAIL
           </LoginTypeBtn>
