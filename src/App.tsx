@@ -14,6 +14,8 @@ import UserProfileInfo from "./page/afterLogin/myprofile/userInfo/userInfo.tsx";
 import EditUser from "./page/afterLogin/myprofile/editUser/editUser.tsx";
 import UserCompany from "./page/afterLogin/myprofile/userCompany/userCompany.tsx";
 import UserManageCompany from "./page/afterLogin/myprofile/userCompany/userManageCompany.tsx";
+import DetailCompany from "./page/afterLogin/home/detailCompany/detailCompany.tsx";
+import DetailInNout from "./page/afterLogin/home/detailInNout/detailInNout.tsx";
 
 function App() {
   const {token} = useAppSelector((state) => state.token);
@@ -35,7 +37,10 @@ function App() {
             </Route>
             <Route path={urlName.login} element={<Login />} />
             <Route path={urlName.join} element={<Join />} />
-            <Route path={urlName.detailCompany} element={<Home />} />
+            <Route path={urlName.detailCompany} element={<Home />}>
+              <Route path={urlName.detailCompany} element={<DetailCompany />} />
+              <Route path={urlName.companyInNout} element={<DetailInNout />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </Layout>

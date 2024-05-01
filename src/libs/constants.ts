@@ -10,5 +10,5 @@ export const urlName = {
   comapny: "/mycompany",
   manage: "/mymanage",
   detailCompany: "/company/:id",
-  // createCompany: "/createCompany",
+  companyInNout: "/company/:id/innout",
 };
