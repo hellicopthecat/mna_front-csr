@@ -1,17 +1,19 @@
 import {configureStore} from "@reduxjs/toolkit";
-import tokenSliceReducer from "./redux/tokenSlice";
-import loginTypeSliceReducer from "./redux/loginTypeSlice";
-import themeTypeSliceReducer from "./redux/themeSlice";
-import activeNavSliceReducer from "./redux/navSlice";
-import companyStateSliceReducer from "./redux/companyStateSlice";
+import tokenSlice from "./redux/tokenSlice";
+import loginTypeSlice from "./redux/loginTypeSlice";
+import themeTypeSlice from "./redux/themeSlice";
+import activeNavSlice from "./redux/navSlice";
+import companyStateSlice from "./redux/companyStateSlice";
+import inNoutNavStateSlice from "./redux/inNoutNavStateSlice";
 
 const store = configureStore({
   reducer: {
-    token: tokenSliceReducer,
-    isLoginSelect: loginTypeSliceReducer,
-    theme: themeTypeSliceReducer,
-    activeNav: activeNavSliceReducer,
-    companyState: companyStateSliceReducer,
+    token: tokenSlice,
+    isLoginSelect: loginTypeSlice,
+    theme: themeTypeSlice,
+    activeNav: activeNavSlice,
+    companyState: companyStateSlice,
+    inNoutNav: inNoutNavStateSlice,
   },
 });
 

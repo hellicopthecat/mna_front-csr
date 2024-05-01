@@ -15,7 +15,7 @@ import EditUser from "./page/afterLogin/myprofile/editUser/editUser.tsx";
 import UserCompany from "./page/afterLogin/myprofile/userCompany/userCompany.tsx";
 import UserManageCompany from "./page/afterLogin/myprofile/userCompany/userManageCompany.tsx";
 import DetailCompany from "./page/afterLogin/home/detailCompany/detailCompany.tsx";
-import DetailInNout from "./page/afterLogin/home/detailInNout/detailInNout.tsx";
+import DetailEveryInNout from "./page/afterLogin/home/detailEveryInNout/detailEveryInNout.tsx";
 
 function App() {
   const {token} = useAppSelector((state) => state.token);
@@ -39,7 +39,10 @@ function App() {
             <Route path={urlName.join} element={<Join />} />
             <Route path={urlName.detailCompany} element={<Home />}>
               <Route path={urlName.detailCompany} element={<DetailCompany />} />
-              <Route path={urlName.companyInNout} element={<DetailInNout />} />
+              <Route
+                path={urlName.companyInNout}
+                element={<DetailEveryInNout />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
