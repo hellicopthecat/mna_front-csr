@@ -7,13 +7,13 @@ export const COMPANY_INNOUT_FRAG = gql`
     totalAssets
     capital
     liabilities
+    netAssets
+    netIncome
     totalRevenue
     totalExpenses
     profitMargin
-    roe
-    netAssets
-    netIncome
-    debtRatio
     equityRatio
+    debtRatio
+    roe
   }
 `;
