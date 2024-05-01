@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 50px;
   h2 {
     font-size: 30px;
   }
@@ -13,7 +13,6 @@ export const CompanyInfoHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
-  padding-bottom: 30px;
   div {
     display: flex;
   }
