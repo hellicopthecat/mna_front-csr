@@ -42,7 +42,7 @@ const HeaderComp = () => {
           />
         </Icon>
         <Link to={`/company/${companyName}`}>
-          <h1>CON.COM</h1>
+          <h1>{companyName?.toUpperCase()}</h1>
         </Link>
       </HeaderLeft>
       <HeaderRight>

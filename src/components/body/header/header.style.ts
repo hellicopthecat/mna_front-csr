@@ -1,12 +1,15 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.header`
+  position: sticky;
+  top: 0;
+  height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid ${(props) => props.theme.secondary};
-  height: 100px;
   padding: 0px 25px;
+  background-color: ${(props) => props.theme.bgColor};
+  border-bottom: 1px solid ${(props) => props.theme.secondary};
 `;
 export const HeaderLeft = styled.div`
   display: flex;
