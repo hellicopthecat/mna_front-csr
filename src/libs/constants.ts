@@ -11,4 +11,5 @@ export const urlName = {
   manage: "/mymanage",
   detailCompany: "/company/:id",
   companyInNout: "/company/:id/innout",
+  editInNout: "/company/:id/innout/:inoutid",
 };

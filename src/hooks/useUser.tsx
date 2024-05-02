@@ -4,6 +4,7 @@ import {useEffect} from "react";
 import {removeToken} from "../redux/tokenSlice";
 import {useNavigate} from "react-router-dom";
 import {Query} from "../libs/__generated__/graphql";
+import {urlName} from "../libs/constants";
 
 const IS_ME_QUERY = gql`
   query SeeMyprofile {
@@ -25,12 +26,11 @@ const useUser = () => {
   const dispatch = useAppDispatch();
   const {data, error, loading} = useQuery(IS_ME_QUERY, {skip: !token});
   useEffect(() => {
-    if (!data && error) {
+    if (!data && !token) {
       dispatch(removeToken());
-      navigate("/");
-      window.location.reload();
+      navigate(urlName.login);
     }
-  }, [data, error, loading, dispatch, navigate]);
+  }, [data, error, loading, dispatch, navigate, token]);
   return {data, error, loading};
 };
 export default useUser;

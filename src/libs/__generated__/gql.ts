@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n  query seeEnl($companyName: String!, $seeEnLId: Int!) {\n    seeEnL(companyName: $companyName, id: $seeEnLId) {\n      id\n      createdAt\n      updateAt\n      enLId\n      enLName\n      enLType\n      enLDesc\n      current\n      assests\n      value\n    }\n  }\n": types.SeeEnlDocument,
     "\n  query SeeMyprofile {\n    seeMyprofile {\n      id\n      createdAt\n      updateAt\n      username\n      email\n      firstName\n      lastName\n      phone\n    }\n  }\n": types.SeeMyprofileDocument,
     "\n  fragment EquityLiabilitiesFrag on EquityLiabilities {\n    id\n    value\n    assests\n    current\n    enLDesc\n    enLId\n    enLName\n    enLType\n  }\n": types.EquityLiabilitiesFragFragmentDoc,
     "\n  fragment ConnectCompanyFrag on Company {\n    id\n    createdAt\n    updateAt\n    companyLogo\n    companyName\n    isManager\n    isOwned\n    connectedCompany {\n      id\n      companyName\n    }\n    connectedCompanyCount\n    connectingCompany {\n      id\n      companyName\n    }\n    connectingCompanyCount\n    companyInNout {\n      id\n      accountNum\n      budget\n      totalAssets\n    }\n  }\n": types.ConnectCompanyFragFragmentDoc,
@@ -44,6 +45,10 @@ const documents = {
  */
 export function gql(source: string): unknown;
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query seeEnl($companyName: String!, $seeEnLId: Int!) {\n    seeEnL(companyName: $companyName, id: $seeEnLId) {\n      id\n      createdAt\n      updateAt\n      enLId\n      enLName\n      enLType\n      enLDesc\n      current\n      assests\n      value\n    }\n  }\n"): (typeof documents)["\n  query seeEnl($companyName: String!, $seeEnLId: Int!) {\n    seeEnL(companyName: $companyName, id: $seeEnLId) {\n      id\n      createdAt\n      updateAt\n      enLId\n      enLName\n      enLType\n      enLDesc\n      current\n      assests\n      value\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -16,6 +16,7 @@ import UserCompany from "./page/afterLogin/myprofile/userCompany/userCompany.tsx
 import UserManageCompany from "./page/afterLogin/myprofile/userCompany/userManageCompany.tsx";
 import DetailCompany from "./page/afterLogin/home/detailCompany/detailCompany.tsx";
 import DetailEveryInNout from "./page/afterLogin/home/detailEveryInNout/detailEveryInNout.tsx";
+import EditAsset from "./components/home/detailInNout/editAsset/editAsset.tsx";
 
 function App() {
   const {token} = useAppSelector((state) => state.token);
@@ -42,7 +43,9 @@ function App() {
               <Route
                 path={urlName.companyInNout}
                 element={<DetailEveryInNout />}
-              />
+              >
+                <Route path={urlName.editInNout} element={<EditAsset />} />
+              </Route>
             </Route>
           </Routes>
         </BrowserRouter>

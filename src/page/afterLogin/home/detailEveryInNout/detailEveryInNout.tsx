@@ -7,10 +7,13 @@ import {Query} from "../../../../libs/__generated__/graphql";
 import styled from "styled-components";
 import LiaBilityOrAsset, {
   IAssetsProps,
-} from "../../../../components/home/detailInNout/ LiaBilityOrAsset";
+} from "../../../../components/home/detailInNout/liaBilityOrAsset";
 import DetailInNoutNav from "../../../../components/home/detailInNout/detailInNoutNav";
 import AccountInfo from "../../../../components/home/detailInNout/accountInfo";
 import {useAppSelector} from "../../../../hooks/storeHook";
+import IncomeExpendTable, {
+  IIncomeExpendProps,
+} from "../../../../components/home/detailInNout/incomeExpendTable";
 
 //gql Query
 const DETAIL_INNOUT = gql`
@@ -75,7 +78,6 @@ const DetailEveryInNout = () => {
   const params = useParams();
   const {data} = useQuery(DETAIL_INNOUT, {variables: {companyName: params.id}});
   const INNOUT = data?.searchCompany.companyInNout;
-  console.log(INNOUT);
   return (
     <DetialInNoutCont>
       <DetailInNoutNav />
@@ -120,17 +122,17 @@ const DetailEveryInNout = () => {
         />
       )}
       {inNoutMode === 6 && (
-        <LiaBilityOrAsset
-          title="비유동자산"
-          total={INNOUT?.nonCurrentAssets as number}
-          assets={INNOUT?.nonCurrentAssetsDesc as IAssetsProps["assets"]}
+        <IncomeExpendTable
+          title="수입모델"
+          total={INNOUT?.incomeMoney as number}
+          iNe={INNOUT?.incomeModel as IIncomeExpendProps["iNe"]}
         />
       )}
       {inNoutMode === 7 && (
-        <LiaBilityOrAsset
-          title="비유동자산"
-          total={INNOUT?.nonCurrentAssets as number}
-          assets={INNOUT?.nonCurrentAssetsDesc as IAssetsProps["assets"]}
+        <IncomeExpendTable
+          title="지출모델"
+          total={INNOUT?.expendMoney as number}
+          iNe={INNOUT?.expendModel as IIncomeExpendProps["iNe"]}
         />
       )}
     </DetialInNoutCont>

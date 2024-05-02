@@ -35,3 +35,15 @@ export interface IEditUserInputProps {
   phone?: string;
   userId?: string;
 }
+// edit Asset
+export interface IEditAssetProps {
+  companyName: string;
+  inNoutId?: number;
+  enLId: string;
+  enLName: string;
+  enLType: string;
+  enLDesc: string;
+  current: "CURRENT" | "NONCURRENT";
+  assests: "ASSET" | "NONASSET";
+  value: number;
+}
