@@ -13,6 +13,7 @@ import {
 import useEditAssetMutate from "./editAssetHook";
 import {useForm} from "react-hook-form";
 import {IEditAssetProps} from "../../../../types/types";
+import useDeleteAssetHook from "./deleteAssetHook";
 
 const SEE_ENL_QUERY = gql`
   query seeEnl($companyName: String!, $seeEnLId: Int!) {
@@ -41,7 +42,7 @@ const EditAsset = () => {
   const {data, loading} = useQuery(SEE_ENL_QUERY, {
     variables: {
       companyName: param?.id,
-      seeEnLId: Number(param?.inoutid),
+      seeEnLId: Number(param?.assetid),
     },
   });
   const ENL = data?.seeEnL;
@@ -61,33 +62,29 @@ const EditAsset = () => {
     });
 
   //gql Mutate
-  const {handleEditAsset, error} = useEditAssetMutate();
+  const {handleEditAsset} = useEditAssetMutate();
+  const {handleDeleteAssets} = useDeleteAssetHook();
 
   //fn
   const onSubmit = () => {
-    const {
-      companyName,
-      enLId,
-      enLName,
-      enLType,
-      enLDesc,
-      current,
-      assests,
-      value,
-    } = getValues();
-    if (loading) {
-      return;
-    }
+    const {companyName, enLName, enLType, enLDesc, current, assests, value} =
+      getValues();
     handleEditAsset({
       companyName,
       inNoutId: Number(param?.inoutid),
-      enLId,
+      enLId: ENL?.enLId + "",
       enLName,
       enLType,
       enLDesc,
       current,
       assests,
       value,
+    });
+  };
+  const onDeleteTdata = () => {
+    handleDeleteAssets({
+      enLId: ENL?.enLId + "",
+      inNoutId: Number(param.inoutid),
     });
   };
 
@@ -108,10 +105,11 @@ const EditAsset = () => {
                 {...register("enLId")}
                 id="enlId"
                 type="text"
-                defaultValue={ENL?.enLId}
+                value={ENL?.enLId}
                 placeholder={!ENL?.enLId ? "입력해주세요" : undefined}
+                disabled
               />
-              <span>자산고유ID는 타회사의 자산고유ID와 중복될수없습니다.</span>
+              <span>자산고유ID는 수정할수없습니다.</span>
             </EditAssetInputCont>
             <EditAssetInputCont>
               <label htmlFor="enlName">자산제목</label>
@@ -205,6 +203,15 @@ const EditAsset = () => {
                 height="30px"
                 fontSize="15px"
                 handleClick={handleSubmit(onSubmit)}
+                btncolor="green"
+              />
+              <BtnTheme
+                text="삭제"
+                width="50px"
+                height="30px"
+                fontSize="15px"
+                handleClick={handleSubmit(onDeleteTdata)}
+                btncolor="tomato"
               />
               <AnchorTheme
                 href={`/company/${param.id}/innout`}

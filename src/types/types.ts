@@ -47,3 +47,25 @@ export interface IEditAssetProps {
   assests: "ASSET" | "NONASSET";
   value: number;
 }
+
+//edit INNOUT
+export interface IEditInNoutProps {
+  companyName: string;
+  accountID?: number;
+  accountName?: string;
+  accountNum?: string;
+  accountDesc?: string;
+  budget?: string;
+}
+
+//create INNOUT
+export interface ICreateAssetProps {
+  companyName: string;
+  enLId: string;
+  enLName: string;
+  enLType: string;
+  enLDesc: string;
+  current: "CURRENT" | "NONCURRENT";
+  assests: "ASSET" | "NONASSET";
+  value: number;
+}

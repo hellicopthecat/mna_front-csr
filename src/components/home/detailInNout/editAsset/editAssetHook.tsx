@@ -35,7 +35,9 @@ const EDIT_ASSET_MUTATION = gql`
   }
 ` as DocumentNode | TypedDocumentNode<Mutation>;
 const useEditAssetMutate = () => {
+  //hook
   const navigate = useNavigate();
+  //gql mutate
   const [editAsset, {loading, error}] = useMutation(EDIT_ASSET_MUTATION);
   const handleEditAsset = async ({
     companyName,
@@ -65,9 +67,6 @@ const useEditAssetMutate = () => {
           cache.modify({
             id,
             fields: {
-              enLId() {
-                return enLId;
-              },
               enLName() {
                 return enLName;
               },
@@ -93,7 +92,6 @@ const useEditAssetMutate = () => {
       },
     });
   };
-
   return {handleEditAsset, loading, error};
 };
 export default useEditAssetMutate;

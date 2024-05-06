@@ -1,8 +1,16 @@
-import styled from "styled-components";
-import {AnchorTheme} from "../../btnTheme";
+import {AnchorTheme} from "../../../btnTheme";
 import {Outlet} from "react-router-dom";
+import {
+  LiaBilityOrAssetBadge,
+  LiaBilityOrAssetBody,
+  LiaBilityOrAssetCont,
+  LiaBilityOrAssetFooter,
+  LiaBilityOrAssetHeader,
+  LiaBilityOrAssetTable,
+} from "./liaBilityOrAsset.style";
 
 export interface IAssetsProps {
+  inOutId: number;
   title: string;
   total: number;
   assets?: [
@@ -18,61 +26,8 @@ export interface IAssetsProps {
     }
   ];
 }
-const LiaBilityOrAssetCont = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  h3 {
-    font-size: 30px;
-  }
-`;
-const LiaBilityOrAssetTable = styled.table`
-  overflow-y: scroll;
-  border: 1px solid ${(props) => props.theme.secondary};
-`;
-const LiaBilityOrAssetHeader = styled.thead`
-  th {
-    padding: 20px;
-  }
-`;
-const LiaBilityOrAssetBody = styled.tbody`
-  tr {
-    border: 1px solid ${(props) => props.theme.secondary};
-    th,
-    td {
-      vertical-align: middle;
-      align-items: center;
-      padding: 10px;
-      text-align: center;
-    }
-  }
-`;
-const LiaBilityOrAssetFooter = styled.tfoot`
-  * {
-    padding: 20px;
-  }
-  th {
-    text-align: end;
-  }
-  td {
-    text-align: center;
-  }
-`;
-const LiaBilityOrAssetBadge = styled.p<{$asset?: boolean; $current?: boolean}>`
-  background-color: ${(props) =>
-    props.$asset
-      ? props.theme.badge
-      : !props.$asset
-      ? props.theme.btnColor
-      : props.$current
-      ? props.theme.secondary
-      : !props.$current
-      ? props.theme.subBadge
-      : props.theme.primary};
-  padding: 3px 5px;
-  border-radius: 4px;
-`;
-const LiaBilityOrAsset = ({title, total, assets}: IAssetsProps) => {
+
+const LiaBilityOrAsset = ({title, total, assets, inOutId}: IAssetsProps) => {
   return (
     <>
       <LiaBilityOrAssetCont>
@@ -91,8 +46,8 @@ const LiaBilityOrAsset = ({title, total, assets}: IAssetsProps) => {
             </tr>
           </LiaBilityOrAssetHeader>
           <LiaBilityOrAssetBody>
-            {assets?.map((asset) => (
-              <tr key={asset.id}>
+            {assets?.map((asset, index) => (
+              <tr key={index}>
                 <th>{asset.id}</th>
                 <td>₩ {!asset.value ? 0 : asset.value.toLocaleString()}</td>
                 <td>{asset.enLId}</td>
@@ -133,17 +88,21 @@ const LiaBilityOrAsset = ({title, total, assets}: IAssetsProps) => {
                           : asset.enLDesc
                       }`}
                 </td>
-                <td style={{display: "flex", justifyContent: "center"}}>
+                <td>
                   <AnchorTheme
-                    href={`${asset.id}`}
+                    href={`${inOutId}/${asset.id}`}
                     text="편집"
                     width="45px"
                     height="25px"
                     fontSize="12px"
+                    center
                   />
                 </td>
               </tr>
             ))}
+            <tr>
+              <td colSpan={9}>더보기</td>
+            </tr>
           </LiaBilityOrAssetBody>
           <LiaBilityOrAssetFooter>
             <tr>
