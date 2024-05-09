@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {CompanyAvatar} from "../../avatar";
+import {Avatar} from "../../avatar";
 import {Link} from "react-router-dom";
 export interface ICompanyConnect {
   title: string;
@@ -47,7 +47,7 @@ const CompanyConnect = ({title, count, connect}: ICompanyConnect) => {
       <ConnectBodyCont>
         {connect?.map((company) => (
           <ConnectBody key={company.id}>
-            <CompanyAvatar width="50px" height="50px" />
+            <Avatar width="50px" height="50px" />
             <Link to={`/`}>
               {company.companyName.length > 10
                 ? `${company.companyName.substring(0, 10)}...`

@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import styled from "styled-components";
 
 export interface ICompanyProduct {
+  companyName: string;
   companyProduct?: [
     {
       id: number;
@@ -26,10 +27,18 @@ const ProductInfoHead = styled.div`
   align-items: end;
   gap: 15px;
 `;
-const ProductInfoBody = styled.div``;
+const ProductInfoBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 const ProductInfoGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  border: 1px solid ${(props) => props.theme.secondary};
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
   h3 {
     grid-column: span 4;
     font-size: 20px;
@@ -44,12 +53,14 @@ const ProductInfoGrid = styled.div`
     }
   }
 `;
-const CompanyProduct = ({companyProduct}: ICompanyProduct) => {
+const CompanyProduct = ({companyProduct, companyName}: ICompanyProduct) => {
   return (
     <CompanyProductCont>
       <ProductInfoHead>
         <h2>상품</h2>
-        <Link to={`/`}>전체보기</Link>
+        <Link to={`/company/${companyName}/product`}>
+          전체보기 ({companyProduct?.length})
+        </Link>
       </ProductInfoHead>
       {companyProduct && companyProduct?.length < 1 ? (
         <ProductInfoBody>

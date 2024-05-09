@@ -28,7 +28,7 @@ const ShareBtn = styled.button<{
   height: ${(props) => props.$height};
   font-size: ${(props) => props.$fontsize};
   text-align: center;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 5px 0;
   display: flex;
   justify-content: center;
@@ -79,7 +79,7 @@ const ShareBtnAnchor = styled(Link)<{
   justify-content: center;
   background-color: ${(props) => props.theme.btnColor};
   color: ${(props) => props.theme.btnTxtColor};
-  border-radius: 20px;
+  border-radius: 10px;
   width: ${(props) => props.$width};
   min-width: 40px;
   height: ${(props) => props.$height};

@@ -10,7 +10,7 @@ import {Mutation} from "../../../libs/__generated__/graphql";
 import {useNavigate} from "react-router-dom";
 
 const JOINUSER_MUTATE = gql`
-  mutation Mutation(
+  mutation joinUser(
     $username: String!
     $email: String!
     $password: String!

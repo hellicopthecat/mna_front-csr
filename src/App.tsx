@@ -15,9 +15,12 @@ import EditUser from "./page/afterLogin/myprofile/editUser/editUser.tsx";
 import UserCompany from "./page/afterLogin/myprofile/userCompany/userCompany.tsx";
 import UserManageCompany from "./page/afterLogin/myprofile/userCompany/userManageCompany.tsx";
 import DetailCompany from "./page/afterLogin/home/detailCompany/detailCompany.tsx";
-import DetailEveryInNout from "./page/afterLogin/home/detailEveryInNout/detailEveryInNout.tsx";
+import DetailEveryInNout from "./page/afterLogin/detailEveryInNout/detailEveryInNout.tsx";
 import EditAsset from "./components/home/detailInNout/editAsset/editAsset.tsx";
 import CreateAssets from "./components/home/detailInNout/createAssets/createAssets.tsx";
+import Product from "./page/afterLogin/product/product.tsx";
+import CreateProduct from "./components/home/product/createProduct/createProduct.tsx";
+import DetailProduct from "./components/home/product/detailProduct/detailProduct.tsx";
 
 function App() {
   const {token} = useAppSelector((state) => state.token);
@@ -47,6 +50,16 @@ function App() {
               >
                 <Route path={urlName.editInNout} element={<EditAsset />} />
                 <Route path={urlName.createAssets} element={<CreateAssets />} />
+              </Route>
+              <Route path={urlName.product} element={<Product />}>
+                <Route
+                  path={urlName.createProduct}
+                  element={<CreateProduct />}
+                />
+                <Route
+                  path={urlName.detailProduct}
+                  element={<DetailProduct />}
+                />
               </Route>
             </Route>
           </Routes>

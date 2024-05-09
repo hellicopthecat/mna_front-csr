@@ -1,23 +1,23 @@
 import {DocumentNode, TypedDocumentNode, gql, useQuery} from "@apollo/client";
 import {useParams} from "react-router-dom";
-import {EQUITY_LIABILITIES_FRAG} from "../../../../libs/fragments/equityLiabilitiesFrag";
-import {INCOME_EXPEND_FRAG} from "../../../../libs/fragments/incomeExpendFrag";
-import {COMPANY_INNOUT_FRAG} from "../../../../libs/fragments/inNoutFrag";
-import {Query} from "../../../../libs/__generated__/graphql";
+import {EQUITY_LIABILITIES_FRAG} from "../../../libs/fragments/equityLiabilitiesFrag";
+import {INCOME_EXPEND_FRAG} from "../../../libs/fragments/incomeExpendFrag";
+import {COMPANY_INNOUT_FRAG} from "../../../libs/fragments/inNoutFrag";
+import {Query} from "../../../libs/__generated__/graphql";
 import styled from "styled-components";
 import LiaBilityOrAsset, {
   IAssetsProps,
-} from "../../../../components/home/detailInNout/tableSheet/liaBilityOrAsset";
-import DetailInNoutNav from "../../../../components/home/detailInNout/detailInNoutNav";
-import AccountInfo from "../../../../components/home/detailInNout/accountInfo/accountInfo";
-import {useAppSelector} from "../../../../hooks/storeHook";
+} from "../../../components/home/detailInNout/tableSheet/liaBilityOrAsset";
+import DetailInNoutNav from "../../../components/home/detailInNout/detailInNoutNav";
+import AccountInfo from "../../../components/home/detailInNout/accountInfo/accountInfo";
+import {useAppSelector} from "../../../hooks/storeHook";
 import IncomeExpendTable, {
   IIncomeExpendProps,
-} from "../../../../components/home/detailInNout/incomeExpendTable";
+} from "../../../components/home/detailInNout/incomeExpendTable";
 
 //gql Query
 const DETAIL_INNOUT = gql`
-  query CompanyInNout($companyName: String!) {
+  query searchCompanyInNout($companyName: String!) {
     searchCompany(companyName: $companyName) {
       companyInNout {
         ...CompanyInNoutFrag

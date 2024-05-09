@@ -1,4 +1,5 @@
 import {UseFormRegister} from "react-hook-form";
+import {TPaymentSwitch} from "../libs/__generated__/graphql";
 //login & join
 type AuthInputName =
   | "username"
@@ -68,4 +69,39 @@ export interface ICreateAssetProps {
   current: "CURRENT" | "NONCURRENT";
   assests: "ASSET" | "NONASSET";
   value: number;
+}
+
+//create Product
+export interface ICreateProduct {
+  companyName: string;
+  itemProductId: string;
+  itemName: string;
+  itemModelName?: string;
+  itemPhoto?: string;
+  itemType?: string;
+  itemCount?: number;
+  itemPrice?: number;
+  itemDesc?: string;
+  incomeTrue?: "INCOME" | "EXPEND";
+  paymentType?: string;
+  accountCode?: string;
+  businessDesc?: string;
+  paymentsDone?: TPaymentSwitch;
+}
+export interface IEditProduct {
+  id?: number;
+  incomeExpendId?: number;
+  itemProductId?: string;
+  itemModelName?: string;
+  itemName?: string;
+  itemPhoto?: string;
+  itemType?: string;
+  itemCount?: number;
+  itemPrice?: number;
+  itemDesc?: string;
+  incomeTrue?: "income" | "expend";
+  paymentType?: string;
+  accountCode?: string;
+  businessDesc?: string;
+  paymentsDone?: TPaymentSwitch;
 }

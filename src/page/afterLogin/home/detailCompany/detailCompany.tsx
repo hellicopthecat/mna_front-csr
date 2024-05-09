@@ -65,10 +65,11 @@ const DetailCompany = () => {
   //redux
   const {companyName} = useAppSelector((state) => state.companyState);
   //gql
-  const {data} = useQuery(SEE_SELECTED_COMPANY, {
+  const {data, error} = useQuery(SEE_SELECTED_COMPANY, {
     variables: {companyName},
   });
   const C_DATA = data?.searchCompany;
+  console.log(error);
   return (
     <HomeWrapper>
       <CompanyInfoHeader>
@@ -103,6 +104,7 @@ const DetailCompany = () => {
       </CompanyInfoWrapper>
       <CompanyInfoWrapper>
         <CompanyProduct
+          companyName={C_DATA?.companyName + ""}
           companyProduct={
             C_DATA?.companyProduct as ICompanyProduct["companyProduct"]
           }
