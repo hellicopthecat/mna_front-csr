@@ -105,3 +105,42 @@ export interface IEditProduct {
   businessDesc?: string;
   paymentsDone?: TPaymentSwitch;
 }
+
+export interface IWorkersProps {
+  worker?: [
+    {
+      id: number;
+      username: string;
+      firstName: string;
+      lastName: string;
+      email: string;
+      phone: string;
+      avatar: string;
+      isOnVacation: boolean;
+    }
+  ];
+  vacation?: [
+    {
+      id: number;
+      joinCompanyDate: string;
+      annual: number;
+      other: number;
+      useAnnualVacation: number;
+      restVacation: number;
+    }
+  ];
+  salary?: [
+    {
+      id: number;
+      beforeTaxMonthlySalary?: number;
+      afterTaxMonthlySalary?: number;
+      annualSalary?: number;
+    }
+  ];
+}
+
+//Create Vacation
+export interface ICreateVacation {
+  annual?: string;
+  joinCompanyDate?: string;
+}

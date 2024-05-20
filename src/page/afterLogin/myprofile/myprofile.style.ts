@@ -3,16 +3,15 @@ import styled from "styled-components";
 export const MyProfileWrapper = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 2fr;
+  height: 100dvh;
+  overflow-x: hidden;
 `;
 export const MyProfileLeft = styled.div`
-  height: 100dvh;
-  flex: 0.5;
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 20px;
   box-shadow: 3px 1px 10px rgba(0, 0, 0, 0.2);
-
   h2 {
     font-weight: 700;
     font-size: 20px;
@@ -30,7 +29,6 @@ export const MyprofileUsername = styled.div`
 `;
 
 export const MyProfileNav = styled.div`
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -50,10 +48,7 @@ export const MyProfileNavAnchor = styled.li<{$path: boolean}>`
   }
 `;
 export const MyProfileRight = styled.div`
-  flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  height: 100dvh;
 `;

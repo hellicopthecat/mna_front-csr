@@ -39,7 +39,7 @@ const EDIT_PRODUCT_MUTATE = gql`
       businessDesc: $businessDesc
       paymentsDone: $paymentsDone
     ) {
-      id
+      ok
       errorMsg
     }
   }
@@ -67,8 +67,6 @@ const useEditProduct = () => {
     businessDesc,
     paymentsDone,
   }: IEditProduct) => {
-    console.log(id);
-    console.log(incomeExpendId);
     await editProduct({
       variables: {
         editProductId: Number(id),
@@ -85,9 +83,8 @@ const useEditProduct = () => {
         businessDesc,
         paymentsDone,
       },
-      update(cache, result) {
-        console.log("update", result);
-        if (result.data?.editProduct.ok) {
+      update(cache, {data}) {
+        if (data?.editProduct.ok) {
           cache.modify({
             id: `Product:${id}`,
             fields: {
@@ -134,15 +131,13 @@ const useEditProduct = () => {
         }
       },
       onCompleted(data) {
-        console.log("complete", data);
-        // if (!data.editProduct.ok) {
-        //   alert(data.editProduct.errorMsg);
-        // }
-        // navigate(`/company/${param.id}/product`);
+        if (!data.editProduct.ok) {
+          alert(data.editProduct.errorMsg);
+        }
+        navigate(`/company/${param.id}/product`);
       },
     });
   };
-  console.log(error);
   return {handelEditProduct, loading, error};
 };
 export default useEditProduct;

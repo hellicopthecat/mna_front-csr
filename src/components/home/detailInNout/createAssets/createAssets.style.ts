@@ -1,22 +1,5 @@
 import styled from "styled-components";
 
-export const CreateAssetsWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100dvw;
-  height: 100dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.4);
-`;
-
-export const CreateAssetsBg = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-`;
 export const CreateAssetsForm = styled.form`
   background-color: white;
   color: black;

@@ -9,5 +9,6 @@ export const USER_FRAG = gql`
     email
     phone
     avatar
+    isOnVacation
   }
 `;

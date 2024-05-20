@@ -1,5 +1,4 @@
 import {ThemeProvider} from "styled-components";
-import Layout from "./components/layout.tsx";
 import GlobalStlye from "./libs/globalStyle.ts";
 import {dark, light} from "./libs/theme.ts";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
@@ -21,6 +20,10 @@ import CreateAssets from "./components/home/detailInNout/createAssets/createAsse
 import Product from "./page/afterLogin/product/product.tsx";
 import CreateProduct from "./components/home/product/createProduct/createProduct.tsx";
 import DetailProduct from "./components/home/product/detailProduct/detailProduct.tsx";
+import CompanyWorkers from "./components/home/workers/companyWorkers.tsx";
+import CreateVacation from "./components/home/workers/createVacation/createVacation.tsx";
+import RegisterWorker from "./components/home/workers/registerWorker/registerWorker.tsx";
+import CreateSalary from "./components/home/workers/createSalary/createSalary.tsx";
 
 function App() {
   const {token} = useAppSelector((state) => state.token);
@@ -28,43 +31,42 @@ function App() {
   return (
     <ThemeProvider theme={!theme ? light : dark}>
       <GlobalStlye />
-      <Layout>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path={urlName.home}
-              element={!token ? <Preview /> : <Myprofile />}
-            >
-              <Route path={urlName.home} element={<UserProfileInfo />} />
-              <Route path={urlName.editUser} element={<EditUser />} />
-              <Route path={urlName.comapny} element={<UserCompany />} />
-              <Route path={urlName.manage} element={<UserManageCompany />} />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={urlName.home}
+            element={!token ? <Preview /> : <Myprofile />}
+          >
+            <Route path={urlName.home} element={<UserProfileInfo />} />
+            <Route path={urlName.editUser} element={<EditUser />} />
+            <Route path={urlName.comapny} element={<UserCompany />} />
+            <Route path={urlName.manage} element={<UserManageCompany />} />
+          </Route>
+
+          <Route path={urlName.login} element={<Login />} />
+          <Route path={urlName.join} element={<Join />} />
+
+          <Route path={urlName.detailCompany} element={<Home />}>
+            <Route path={urlName.detailCompany} element={<DetailCompany />} />
+            <Route path={urlName.companyInNout} element={<DetailEveryInNout />}>
+              <Route path={urlName.editInNout} element={<EditAsset />} />
+              <Route path={urlName.createAssets} element={<CreateAssets />} />
             </Route>
-            <Route path={urlName.login} element={<Login />} />
-            <Route path={urlName.join} element={<Join />} />
-            <Route path={urlName.detailCompany} element={<Home />}>
-              <Route path={urlName.detailCompany} element={<DetailCompany />} />
+            <Route path={urlName.product} element={<Product />}>
+              <Route path={urlName.createProduct} element={<CreateProduct />} />
+              <Route path={urlName.detailProduct} element={<DetailProduct />} />
+            </Route>
+            <Route path={urlName.companyWokers} element={<CompanyWorkers />}>
+              <Route path={urlName.registWorker} element={<RegisterWorker />} />
               <Route
-                path={urlName.companyInNout}
-                element={<DetailEveryInNout />}
-              >
-                <Route path={urlName.editInNout} element={<EditAsset />} />
-                <Route path={urlName.createAssets} element={<CreateAssets />} />
-              </Route>
-              <Route path={urlName.product} element={<Product />}>
-                <Route
-                  path={urlName.createProduct}
-                  element={<CreateProduct />}
-                />
-                <Route
-                  path={urlName.detailProduct}
-                  element={<DetailProduct />}
-                />
-              </Route>
+                path={urlName.createVacation}
+                element={<CreateVacation />}
+              />
+              <Route path={urlName.createSalary} element={<CreateSalary />} />
             </Route>
-          </Routes>
-        </BrowserRouter>
-      </Layout>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

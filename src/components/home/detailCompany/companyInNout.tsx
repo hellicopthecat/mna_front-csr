@@ -28,7 +28,7 @@ const CompanyInNoutTitle = styled.div`
 `;
 const InNoutWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 10px;
 `;
 const InNoutInfoCont = styled.div`

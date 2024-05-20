@@ -27,12 +27,17 @@ const ConnectTitle = styled.div`
 `;
 const ConnectBodyCont = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
 `;
 const ConnectBody = styled.div`
   display: flex;
   align-items: center;
+  padding: 10px 20px;
   gap: 30px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
+  border: 1px solid ${(props) => props.theme.secondary};
+  border-radius: 5px;
 `;
 
 const CompanyConnect = ({title, count, connect}: ICompanyConnect) => {

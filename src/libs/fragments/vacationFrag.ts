@@ -5,9 +5,10 @@ export const VACATION_FRAG = gql`
     id
     createdAt
     updateAt
-    totalVacation
+    joinCompanyDate
+    annual
+    other
+    useAnnualVacation
     restVacation
-    specialVation
-    sickLeave
   }
 `;

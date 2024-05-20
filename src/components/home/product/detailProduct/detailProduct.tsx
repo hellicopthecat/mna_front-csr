@@ -2,9 +2,9 @@ import {DocumentNode, TypedDocumentNode, gql, useQuery} from "@apollo/client";
 import {useNavigate, useParams} from "react-router-dom";
 import {Query} from "../../../../libs/__generated__/graphql";
 import {
-  DetailProductBg,
+  DetailProductBodyGrid,
   DetailProductBtn,
-  DetailProductCont,
+  DetailProductHeadGrid,
   DetailProductInfo,
   DetailProductLeft,
   DetailProductRight,
@@ -18,6 +18,8 @@ import {IEditProduct} from "../../../../types/types";
 import {INCOME_EXPEND_FRAG} from "../../../../libs/fragments/incomeExpendFrag";
 import EditDetailProduct from "./editDetailProduct";
 import useEditProduct from "./editProductHook";
+import useDeleteProduct from "./deleteProductHook";
+import ModalWrapper from "../../../shareComp/modalWrapper";
 
 const SEE_DETAIL_PRODUCT = gql`
   query seeDetailProduct($seeProductId: Int!) {
@@ -45,13 +47,13 @@ const DetailProduct = () => {
   const params = useParams();
   const navigate = useNavigate();
   //gql query
-  const {data, error, loading} = useQuery(SEE_DETAIL_PRODUCT, {
+  const {data, loading} = useQuery(SEE_DETAIL_PRODUCT, {
     variables: {seeProductId: Number(params.productID)},
   });
   const product = data?.seeProduct;
-  console.log(error);
   //gql mutate
   const {handelEditProduct} = useEditProduct();
+  const {handleDeleteProduct} = useDeleteProduct();
   //state
   const [edit, setEdit] = useState(false);
   //form
@@ -107,9 +109,14 @@ const DetailProduct = () => {
       paymentsDone,
     });
   };
+  const deleteProduct = () => {
+    handleDeleteProduct({
+      productId: product?.id as number,
+      companyName: params.id as string,
+    });
+  };
   return (
-    <DetailProductCont>
-      <DetailProductBg onClick={goBack} />
+    <ModalWrapper goBack={goBack}>
       <DetailProductInfo>
         <DetailProductLeft>
           <Avatar width="500px" height="500px" radius="0" />
@@ -119,19 +126,23 @@ const DetailProduct = () => {
             <div>loading</div>
           ) : (
             <>
-              <DetailProductText>
-                <p>제품고유ID:{product?.id}</p>
-                <small>생성날짜 : {product?.createdAt}</small>
-                <small>수정된날짜 : {product?.updateAt}</small>
-              </DetailProductText>
-              <DetailProductText>
-                <p>제품생산ID</p>
-                <p>
-                  {!product?.itemProductId ? "미기입" : product?.itemProductId}
-                </p>
-              </DetailProductText>
+              <DetailProductHeadGrid>
+                <DetailProductText>
+                  <p>제품고유ID:{product?.id}</p>
+                  <small>생성날짜 : {product?.createdAt}</small>
+                  <small>수정된날짜 : {product?.updateAt}</small>
+                </DetailProductText>
+                <DetailProductText>
+                  <p>제품생산ID</p>
+                  <p>
+                    {!product?.itemProductId
+                      ? "미기입"
+                      : product?.itemProductId}
+                  </p>
+                </DetailProductText>
+              </DetailProductHeadGrid>
               {!edit && (
-                <>
+                <DetailProductBodyGrid>
                   <DetailProductText>
                     <p>제품명</p>
                     <p>{!product?.itemName ? "미기입" : product?.itemName}</p>
@@ -176,14 +187,7 @@ const DetailProduct = () => {
                         : product?.incomeExpend.accountCode}
                     </p>
                   </DetailProductText>
-                  <DetailProductText>
-                    <p>거래비고</p>
-                    <p>
-                      {!product?.incomeExpend.businessDesc
-                        ? "미기입"
-                        : product?.incomeExpend.businessDesc}
-                    </p>
-                  </DetailProductText>
+
                   <DetailProductText>
                     <p>결제진행</p>
                     <p>
@@ -195,10 +199,18 @@ const DetailProduct = () => {
                     </p>
                   </DetailProductText>
                   <DetailProductText>
+                    <p>거래비고</p>
+                    <p>
+                      {!product?.incomeExpend.businessDesc
+                        ? "미기입"
+                        : product?.incomeExpend.businessDesc}
+                    </p>
+                  </DetailProductText>
+                  <DetailProductText>
                     <p>제품설명</p>
                     <p>{!product?.itemDesc ? "미기입" : product?.itemDesc}</p>
                   </DetailProductText>
-                </>
+                </DetailProductBodyGrid>
               )}
               {edit && (
                 <EditDetailProduct
@@ -223,13 +235,22 @@ const DetailProduct = () => {
           )}
           <DetailProductBtn>
             {!edit && (
-              <BtnTheme
-                text="편집"
-                width="60px"
-                height="40px"
-                fontSize="15px"
-                handleClick={() => setEdit(true)}
-              />
+              <>
+                <BtnTheme
+                  text="편집"
+                  width="60px"
+                  height="40px"
+                  fontSize="15px"
+                  handleClick={() => setEdit(true)}
+                />
+                <BtnTheme
+                  text="삭제"
+                  width="60px"
+                  height="40px"
+                  fontSize="15px"
+                  handleClick={deleteProduct}
+                />
+              </>
             )}
             {edit && (
               <BtnTheme
@@ -250,7 +271,7 @@ const DetailProduct = () => {
           </DetailProductBtn>
         </DetailProductRight>
       </DetailProductInfo>
-    </DetailProductCont>
+    </ModalWrapper>
   );
 };
 export default DetailProduct;

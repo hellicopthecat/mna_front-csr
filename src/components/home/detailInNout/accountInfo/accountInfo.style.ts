@@ -17,6 +17,16 @@ export const AccountCont = styled.div`
 export const AccountInfoData = styled.div`
   display: flex;
   gap: 10px;
+  input {
+    border: none;
+    background-color: inherit;
+    border-bottom: 1px solid ${(props) => props.theme.secondary};
+    padding: 5px;
+    color: ${(props) => props.theme.txtColor};
+    ::placeholder {
+      color: gray;
+    }
+  }
 `;
 export const AccountInfoEdit = styled.button`
   color: ${(props) => props.theme.txtColor};

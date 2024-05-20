@@ -3,14 +3,17 @@ import styled from "styled-components";
 export const JoinWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
   align-items: center;
+  gap: 20px;
   h2 {
     font-size: 30px;
     font-weight: 600;
     margin-bottom: 20px;
   }
   form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
     border-top: 1px solid ${(props) => props.theme.secondary};
     border-bottom: 1px solid ${(props) => props.theme.secondary};

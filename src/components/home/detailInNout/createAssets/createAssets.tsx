@@ -2,16 +2,15 @@ import {useForm} from "react-hook-form";
 import {useNavigate, useParams} from "react-router-dom";
 import {ICreateAssetProps} from "../../../../types/types";
 import {
-  CreateAssetsBg,
   CreateAssetsBtn,
   CreateAssetsForm,
   CreateAssetsInput,
   CreateAssetsRadio,
   CreateAssetsTextArea,
-  CreateAssetsWrapper,
 } from "./createAssets.style";
 import {AnchorTheme, BtnTheme} from "../../../btnTheme";
 import useCreateAssetsMutate from "./createAssetsHook";
+import ModalWrapper from "../../../shareComp/modalWrapper";
 
 const CreateAssets = () => {
   //hook
@@ -57,8 +56,7 @@ const CreateAssets = () => {
     });
   };
   return (
-    <CreateAssetsWrapper>
-      <CreateAssetsBg onClick={goBack} />
+    <ModalWrapper goBack={goBack}>
       <CreateAssetsForm onSubmit={handleSubmit(onSubmit)}>
         <legend>자산생성</legend>
         <CreateAssetsInput>
@@ -168,7 +166,7 @@ const CreateAssets = () => {
           />
         </CreateAssetsBtn>
       </CreateAssetsForm>
-    </CreateAssetsWrapper>
+    </ModalWrapper>
   );
 };
 

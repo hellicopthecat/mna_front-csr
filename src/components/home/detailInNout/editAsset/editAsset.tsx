@@ -3,17 +3,16 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Query} from "../../../../libs/__generated__/graphql";
 import {AnchorTheme, BtnTheme} from "../../../btnTheme";
 import {
-  EditAssetBgCont,
   EditAssetBtn,
   EditAssetCont,
   EditAssetInputCont,
   EditAssetRadioCont,
-  EditAssetWrapper,
 } from "./editAsset.style";
 import useEditAssetMutate from "./editAssetHook";
 import {useForm} from "react-hook-form";
 import {IEditAssetProps} from "../../../../types/types";
 import useDeleteAssetHook from "./deleteAssetHook";
+import ModalWrapper from "../../../shareComp/modalWrapper";
 
 const SEE_ENL_QUERY = gql`
   query seeEnl($companyName: String!, $seeEnLId: Int!) {
@@ -87,12 +86,12 @@ const EditAsset = () => {
       inNoutId: Number(param.inoutid),
     });
   };
+  const goBack = () => {
+    navigate(`/company/${param.id}/innout`);
+  };
 
   return (
-    <EditAssetWrapper>
-      <EditAssetBgCont
-        onClick={() => navigate(`/company/${param.id}/innout`)}
-      />
+    <ModalWrapper goBack={goBack}>
       <EditAssetCont>
         {loading ? (
           <div>loading</div>
@@ -224,7 +223,7 @@ const EditAsset = () => {
           </form>
         )}
       </EditAssetCont>
-    </EditAssetWrapper>
+    </ModalWrapper>
   );
 };
 export default EditAsset;

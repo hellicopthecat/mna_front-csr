@@ -1,15 +1,11 @@
 import {useForm} from "react-hook-form";
 import {BtnTheme} from "../../../btnTheme";
-import {
-  CreateProductBg,
-  CreateProductCont,
-  CreateProductForm,
-  CreateProductInput,
-} from "./createProduct.style";
+import {CreateProductForm, CreateProductInput} from "./createProduct.style";
 import {useNavigate, useParams} from "react-router-dom";
 import {ICreateProduct} from "../../../../types/types";
 import useCreateProductMutate from "./createProductHook";
 import {TPaymentSwitch} from "../../../../libs/__generated__/graphql";
+import ModalWrapper from "../../../shareComp/modalWrapper";
 
 const CreateProduct = () => {
   //hook
@@ -72,8 +68,7 @@ const CreateProduct = () => {
   };
   const goBack = () => navigate(`/company/${param.id}/product`);
   return (
-    <CreateProductCont>
-      <CreateProductBg onClick={goBack} />
+    <ModalWrapper goBack={goBack}>
       <CreateProductForm onSubmit={handleSubmit(onSubmit)}>
         <legend>제품생성</legend>
         <CreateProductInput>
@@ -216,7 +211,7 @@ const CreateProduct = () => {
           handleClick={handleSubmit(onSubmit)}
         />
       </CreateProductForm>
-    </CreateProductCont>
+    </ModalWrapper>
   );
 };
 export default CreateProduct;

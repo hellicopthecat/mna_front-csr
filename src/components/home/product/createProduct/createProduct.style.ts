@@ -1,19 +1,5 @@
 import styled from "styled-components";
-export const CreateProductCont = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  width: 100%;
-  height: 100dvh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-export const CreateProductBg = styled.div`
-  width: 100%;
-  height: 100%;
-`;
+
 export const CreateProductForm = styled.form`
   position: absolute;
   background-color: white;

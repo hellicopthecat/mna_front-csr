@@ -1,20 +1,5 @@
 import styled from "styled-components";
 
-export const EditAssetWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100dvw;
-  height: 100dvh;
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-export const EditAssetBgCont = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 export const EditAssetCont = styled.div`
   position: absolute;
   display: flex;

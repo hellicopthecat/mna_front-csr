@@ -11,6 +11,7 @@ export const FormWrapper = styled.div`
   form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     padding: 20px;
   }

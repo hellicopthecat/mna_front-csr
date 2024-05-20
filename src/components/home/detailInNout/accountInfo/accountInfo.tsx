@@ -67,6 +67,7 @@ const AccountInfo = ({
                 {...register("accountName")}
                 type="text"
                 defaultValue={accountName}
+                placeholder={!accountName ? "계좌이름" : accountName}
               />
             )}
           </AccountInfoData>
@@ -79,6 +80,7 @@ const AccountInfo = ({
                 {...register("accountNum")}
                 type="text"
                 defaultValue={accountNum}
+                placeholder={!accountNum ? "계좌번호" : accountNum}
               />
             )}
           </AccountInfoData>
@@ -91,6 +93,7 @@ const AccountInfo = ({
                 {...register("accountDesc")}
                 type="text"
                 defaultValue={accountDesc}
+                placeholder={!accountDesc ? "계좌설명" : accountDesc}
               />
             )}
           </AccountInfoData>

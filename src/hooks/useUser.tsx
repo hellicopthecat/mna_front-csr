@@ -28,6 +28,7 @@ const useUser = () => {
   useEffect(() => {
     if (!data && !token) {
       dispatch(removeToken());
+      sessionStorage.clear();
       navigate(urlName.login);
     }
   }, [data, error, loading, dispatch, navigate, token]);

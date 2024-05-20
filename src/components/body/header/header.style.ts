@@ -3,17 +3,19 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.header`
   position: sticky;
   top: 0;
+  left: 0;
   height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 25px;
+  padding: 20px;
   background-color: ${(props) => props.theme.bgColor};
   border-bottom: 1px solid ${(props) => props.theme.secondary};
 `;
 export const HeaderLeft = styled.div`
   display: flex;
   align-items: center;
+
   svg {
     margin-right: 30px;
   }
@@ -26,7 +28,7 @@ export const HeaderLeft = styled.div`
 `;
 export const HeaderRight = styled.div`
   display: flex;
-  gap: 30px;
+  gap: 20px;
   justify-content: space-between;
   align-items: center;
 `;

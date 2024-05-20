@@ -16,4 +16,8 @@ export const urlName = {
   product: "/company/:id/product",
   createProduct: "/company/:id/product/createProduct",
   detailProduct: "/company/:id/product/:productID",
+  companyWokers: "/company/:id/workers",
+  registWorker: "/company/:id/workers/regist-worker",
+  createVacation: "/company/:id/workers/:userID/create-vacation",
+  createSalary: "/company/:id/workers/:userID/create-salary",
 };
