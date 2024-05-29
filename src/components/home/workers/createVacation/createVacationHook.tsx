@@ -1,19 +1,19 @@
 import {gql, useMutation} from "@apollo/client";
 import {useParams} from "react-router-dom";
-import {ICreateVacation} from "../../../../../types/types";
-import {IParamID} from "../../../../../types/routerType";
+import {IParamID} from "../../../../types/routerType";
+import {ICreateVacation} from "../../../../types/types";
 
 const CREATE_VACATION_HOOK = gql`
   mutation createVacation(
+    $createVacationId: Int!
     $username: String!
-    $companyName: String!
-    $annual: Int
+    $other: Int
     $joinCompanyDate: String
   ) {
     createVacation(
+      id: $createVacationId
       username: $username
-      companyName: $companyName
-      annual: $annual
+      other: $other
       joinCompanyDate: $joinCompanyDate
     ) {
       ok
@@ -25,14 +25,14 @@ const useCreateVacation = () => {
   const param = useParams<keyof IParamID>();
   const [createVacation, {loading, error}] = useMutation(CREATE_VACATION_HOOK);
   const handleCreateVacation = async ({
-    annual,
+    other,
     joinCompanyDate,
   }: ICreateVacation) => {
     await createVacation({
       variables: {
         username: param.userID,
-        companyName: param.id,
-        annual,
+        createVacationId: Number(param.id),
+        other,
         joinCompanyDate,
       },
     });

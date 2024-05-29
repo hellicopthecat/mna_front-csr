@@ -9,6 +9,10 @@ const CardInfo = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  white-space: nowrap;
+  span {
+    margin-right: 10px;
+  }
 `;
 
 const UserCompanyCardInfo = ({keyword, value}: ICardInfo) => {

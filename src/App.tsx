@@ -24,6 +24,11 @@ import CompanyWorkers from "./components/home/workers/companyWorkers.tsx";
 import CreateVacation from "./components/home/workers/createVacation/createVacation.tsx";
 import RegisterWorker from "./components/home/workers/registerWorker/registerWorker.tsx";
 import CreateSalary from "./components/home/workers/createSalary/createSalary.tsx";
+import DetailVacation from "./components/home/workers/detailVacation/detailVacation.tsx";
+import DetailSalary from "./components/home/workers/detailSalary/detailSalary.tsx";
+import UsingVacation from "./components/home/workers/usingVacation/usingVacation.tsx";
+import CreateCompany from "./page/afterLogin/myprofile/userCompany/createCompany/createCompany.tsx";
+import SearchCompany from "./page/afterLogin/searchCompany/searchCompany.tsx";
 
 function App() {
   const {token} = useAppSelector((state) => state.token);
@@ -40,6 +45,7 @@ function App() {
             <Route path={urlName.home} element={<UserProfileInfo />} />
             <Route path={urlName.editUser} element={<EditUser />} />
             <Route path={urlName.comapny} element={<UserCompany />} />
+            <Route path={urlName.createCompany} element={<CreateCompany />} />
             <Route path={urlName.manage} element={<UserManageCompany />} />
           </Route>
 
@@ -48,6 +54,7 @@ function App() {
 
           <Route path={urlName.detailCompany} element={<Home />}>
             <Route path={urlName.detailCompany} element={<DetailCompany />} />
+            <Route path={urlName.searchCompany} element={<SearchCompany />} />
             <Route path={urlName.companyInNout} element={<DetailEveryInNout />}>
               <Route path={urlName.editInNout} element={<EditAsset />} />
               <Route path={urlName.createAssets} element={<CreateAssets />} />
@@ -63,6 +70,12 @@ function App() {
                 element={<CreateVacation />}
               />
               <Route path={urlName.createSalary} element={<CreateSalary />} />
+              <Route path={urlName.detailSalary} element={<DetailSalary />} />
+              <Route
+                path={urlName.detailVacation}
+                element={<DetailVacation />}
+              />
+              <Route path={urlName.usingVacation} element={<UsingVacation />} />
             </Route>
           </Route>
         </Routes>

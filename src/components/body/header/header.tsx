@@ -13,15 +13,17 @@ import {setDark, setLight} from "../../../redux/themeSlice";
 import {removeToken} from "../../../redux/tokenSlice";
 import {activeNav} from "../../../redux/navSlice";
 import {Avatar} from "../../avatar";
+import HeaderSearch from "./headerSearch/headerSearch";
 
 const HeaderComp = () => {
   //custom hook
-
   const {data} = useUser();
   const user = data?.seeMyprofile;
-  //state
+  //redux
   const {theme} = useAppSelector((state) => state.theme);
-  const {companyName} = useAppSelector((state) => state.companyState);
+  const {companyId, companyName} = useAppSelector(
+    (state) => state.companyState
+  );
   const dispatch = useAppDispatch();
   return (
     <HeaderWrapper>
@@ -41,11 +43,12 @@ const HeaderComp = () => {
             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
           />
         </Icon>
-        <Link to={`/company/${companyName}`}>
-          <h1>{companyName?.toUpperCase()}</h1>
+        <Link to={`/company/${companyId}`}>
+          <h1>{companyName}</h1>
         </Link>
       </HeaderLeft>
       <HeaderRight>
+        <HeaderSearch />
         <UserInfo>
           <Link to={urlName.home}>
             <Avatar width="20px" height="20px" />
@@ -85,7 +88,6 @@ const HeaderComp = () => {
             />
           </Icon>
         )}
-
         <Icon
           fill="none"
           stroke="currentColor"

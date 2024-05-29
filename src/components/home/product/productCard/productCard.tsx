@@ -10,10 +10,11 @@ import {
   ProductCardWrapper,
 } from "./productCard.style";
 import {Avatar} from "../../../avatar";
+import {IParamID} from "../../../../types/routerType";
 
 const DETAIL_PRODUCT = gql`
-  query searchCompanyProduct($companyName: String!) {
-    searchCompany(companyName: $companyName) {
+  query searchCompanyProduct($searchCompanyId: Int!) {
+    searchCompany(id: $searchCompanyId) {
       companyProduct {
         ...ProductFrag
       }
@@ -22,11 +23,11 @@ const DETAIL_PRODUCT = gql`
   ${PRODUCT_FRAG}
 ` as DocumentNode | TypedDocumentNode<Query>;
 const ProductCard = () => {
-  const param = useParams();
+  const param = useParams<keyof IParamID>();
   const {data, loading} = useQuery(DETAIL_PRODUCT, {
-    variables: {companyName: param.id},
+    variables: {searchCompanyId: Number(param.id)},
   });
-  const PRODUCT = data?.searchCompany.companyProduct;
+  const PRODUCT = data?.searchCompany?.companyProduct;
   if (loading) {
     return <div>loading</div>;
   }

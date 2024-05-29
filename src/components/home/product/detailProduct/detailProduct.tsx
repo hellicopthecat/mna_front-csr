@@ -111,8 +111,8 @@ const DetailProduct = () => {
   };
   const deleteProduct = () => {
     handleDeleteProduct({
-      productId: product?.id as number,
-      companyName: params.id as string,
+      productId: Number(product?.id),
+      companyId: Number(params.id),
     });
   };
   return (

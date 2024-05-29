@@ -1,5 +1,4 @@
 import {DocumentNode, TypedDocumentNode, useQuery, gql} from "@apollo/client";
-import {useAppSelector} from "../../../../hooks/storeHook";
 import {Query} from "../../../../libs/__generated__/graphql";
 import {CompanyInfoWrapper, HomeWrapper} from "./detailCompany.style";
 import CompanyInNout from "../../../../components/home/detailCompany/companyInNout";
@@ -18,9 +17,11 @@ import {COMPANY_ADRESS_FRAG} from "../../../../libs/fragments/companyAdressFrag"
 import CompanyInfo, {
   ICompanyInfo,
 } from "../../../../components/home/detailCompany/companyInfo/companyInfo";
+import {useParams} from "react-router-dom";
+import {IParamID} from "../../../../types/routerType";
 const SEE_SELECTED_COMPANY = gql`
-  query searchCompany($companyName: String!) {
-    searchCompany(companyName: $companyName) {
+  query searchCompany($searchCompanyId: Int!) {
+    searchCompany(id: $searchCompanyId) {
       id
       createdAt
       updateAt
@@ -67,14 +68,15 @@ const SEE_SELECTED_COMPANY = gql`
 ` as DocumentNode | TypedDocumentNode<Query>;
 
 const DetailCompany = () => {
-  //redux
-  const {companyName} = useAppSelector((state) => state.companyState);
+  const param = useParams<keyof IParamID>();
   //gql
-  const {data, loading, error} = useQuery(SEE_SELECTED_COMPANY, {
-    variables: {companyName},
+  const {data, loading} = useQuery(SEE_SELECTED_COMPANY, {
+    variables: {searchCompanyId: Number(param.id)},
   });
   const C_DATA = data?.searchCompany;
-  console.log(error);
+  if (!C_DATA) {
+    return <div>검색하신 회사는 존재하지 않습니다.</div>;
+  }
   return (
     <HomeWrapper>
       {loading ? (
@@ -91,19 +93,26 @@ const DetailCompany = () => {
             companyAdress={
               C_DATA?.companyAdress as ICompanyInfo["companyAdress"]
             }
+            connectedCompany={
+              C_DATA?.connectedCompany as ICompanyInfo["connectedCompany"]
+            }
+            connectingCompany={
+              C_DATA.connectingCompany as ICompanyInfo["connectingCompany"]
+            }
           />
 
           <CompanyInfoWrapper>
             <CompanyInNout inNout={C_DATA?.companyInNout as object} />
           </CompanyInfoWrapper>
+
           <CompanyInfoWrapper>
             <WorkersPage
               worker={C_DATA?.companyWorker as IWorkersProps["worker"]}
             />
           </CompanyInfoWrapper>
+
           <CompanyInfoWrapper>
             <CompanyProduct
-              companyName={C_DATA?.companyName + ""}
               companyProduct={
                 C_DATA?.companyProduct as ICompanyProduct["companyProduct"]
               }

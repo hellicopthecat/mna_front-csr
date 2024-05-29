@@ -10,7 +10,7 @@ import {useNavigate, useParams} from "react-router-dom";
 
 const CREATE_ASSETS_MUTATION = gql`
   mutation CreateEnL(
-    $companyName: String!
+    $createEnLId: Int!
     $enLId: String!
     $enLName: String!
     $enLType: String!
@@ -20,7 +20,7 @@ const CREATE_ASSETS_MUTATION = gql`
     $enLDesc: String
   ) {
     createEnL(
-      companyName: $companyName
+      id: $createEnLId
       enLId: $enLId
       enLName: $enLName
       enLType: $enLType
@@ -30,6 +30,7 @@ const CREATE_ASSETS_MUTATION = gql`
       enLDesc: $enLDesc
     ) {
       ok
+      id
       errorMsg
     }
   }
@@ -41,7 +42,7 @@ const useCreateAssetsMutate = () => {
   // mutate gql
   const [createAssets, {loading, error}] = useMutation(CREATE_ASSETS_MUTATION);
   const handleCreateAssets = async ({
-    companyName,
+    companyId,
     enLId,
     enLName,
     enLType,
@@ -55,7 +56,7 @@ const useCreateAssetsMutate = () => {
     }
     await createAssets({
       variables: {
-        companyName,
+        createEnLId: companyId,
         enLId,
         enLName,
         enLType,
@@ -68,7 +69,7 @@ const useCreateAssetsMutate = () => {
         if (data?.createEnL.ok) {
           const newDataList = {
             __typename: "EquityLiabilities",
-            id: `new`,
+            id: data.createEnL.id,
             value: Number(value),
             assests: current === "CURRENT" ? true : false,
             current: assests === "ASSET" ? true : false,
@@ -93,7 +94,7 @@ const useCreateAssetsMutate = () => {
           alert(errorMsg);
         }
         if (ok) {
-          navigate(`/company/${companyName}/innout`);
+          navigate(`/company/${companyId}/innout`);
         }
       },
     });

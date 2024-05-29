@@ -11,17 +11,18 @@ import {
 import {AnchorTheme, BtnTheme} from "../../../btnTheme";
 import useCreateAssetsMutate from "./createAssetsHook";
 import ModalWrapper from "../../../shareComp/modalWrapper";
+import {IParamID} from "../../../../types/routerType";
 
 const CreateAssets = () => {
   //hook
-  const params = useParams();
+  const params = useParams<keyof IParamID>();
   const navigate = useNavigate();
   const {handleCreateAssets} = useCreateAssetsMutate();
   //form
   const {register, handleSubmit, getValues, setValue} =
     useForm<ICreateAssetProps>({
       defaultValues: {
-        companyName: params.id,
+        companyId: Number(params.id),
         enLId: "",
         enLName: "",
         enLType: "",
@@ -35,7 +36,7 @@ const CreateAssets = () => {
   const goBack = () => navigate(`/company/${params.id}/innout`);
   const onSubmit = () => {
     const {
-      companyName,
+      companyId,
       enLId,
       enLName,
       enLType,
@@ -45,7 +46,7 @@ const CreateAssets = () => {
       value,
     } = getValues();
     handleCreateAssets({
-      companyName,
+      companyId,
       enLId,
       enLName,
       enLType,

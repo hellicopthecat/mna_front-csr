@@ -8,8 +8,8 @@ import {Mutation} from "../../../../libs/__generated__/graphql";
 import {useNavigate, useParams} from "react-router-dom";
 import {IParamID} from "../../../../types/routerType";
 const REGISTER_WORKER_MUTATE = gql`
-  mutation registWorker($username: String!, $companyName: String!) {
-    registWorker(username: $username, companyName: $companyName) {
+  mutation registWorker($username: String!, $registWorkerId: Int!) {
+    registWorker(username: $username, id: $registWorkerId) {
       ok
       id
       subId
@@ -26,13 +26,13 @@ const useRegisterWorker = () => {
   //fn
   const handleRegistWorker = async ({
     username,
-    companyName,
+    companyId,
   }: {
     username: string;
-    companyName: string;
+    companyId: number;
   }) => {
     await registWorker({
-      variables: {username, companyName},
+      variables: {username, registWorkerId: companyId},
       onCompleted({registWorker}) {
         if (!registWorker.ok) {
           alert(registWorker.errorMsg);

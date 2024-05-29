@@ -38,8 +38,8 @@ export const UserInfo = styled.div`
   gap: 15px;
 `;
 export const Icon = styled.svg<{$icon?: number}>`
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   stroke-width: 2px;
   color: ${(props) =>
     props.$icon === 1

@@ -1,8 +1,8 @@
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import styled from "styled-components";
+import {IParamID} from "../../../types/routerType";
 
 export interface ICompanyProduct {
-  companyName: string;
   companyProduct?: [
     {
       id: number;
@@ -59,13 +59,14 @@ const ProductInfoGrid = styled.div`
     }
   }
 `;
-const CompanyProduct = ({companyProduct, companyName}: ICompanyProduct) => {
+const CompanyProduct = ({companyProduct}: ICompanyProduct) => {
+  const param = useParams<keyof IParamID>();
   const navigate = useNavigate();
   return (
     <CompanyProductCont>
       <ProductInfoHead>
         <h2>상품</h2>
-        <Link to={`/company/${companyName}/product`}>전체보기</Link>
+        <Link to={`/company/${param.id}/product`}>전체보기</Link>
       </ProductInfoHead>
       {companyProduct && companyProduct?.length < 1 ? (
         <ProductInfoBody>
@@ -77,7 +78,7 @@ const CompanyProduct = ({companyProduct, companyName}: ICompanyProduct) => {
             <ProductInfoGrid
               key={item.id}
               onClick={() =>
-                navigate(`/company/${companyName}/product/${item.id}`)
+                navigate(`/company/${param.id}/product/${item.id}`)
               }
             >
               <h3>{!item.itemModelName ? "미기입" : item.itemModelName}</h3>

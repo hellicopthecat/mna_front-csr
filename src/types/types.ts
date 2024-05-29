@@ -1,5 +1,5 @@
 import {UseFormRegister} from "react-hook-form";
-import {TPaymentSwitch} from "../libs/__generated__/graphql";
+import {TPaymentSwitch, TVacation} from "../libs/__generated__/graphql";
 //login & join
 type AuthInputName =
   | "username"
@@ -36,10 +36,19 @@ export interface IEditUserInputProps {
   phone?: string;
   userId?: string;
 }
+//edit companyAdress
+export interface IEditCompanyAdress {
+  id: string;
+  companyId: number;
+  country: string;
+  city: string;
+  streetAdress: string;
+  restAdress: string;
+  adressNum: string;
+}
 // edit Asset
 export interface IEditAssetProps {
-  companyName: string;
-  inNoutId?: number;
+  enlDescId?: number;
   enLId: string;
   enLName: string;
   enLType: string;
@@ -51,7 +60,7 @@ export interface IEditAssetProps {
 
 //edit INNOUT
 export interface IEditInNoutProps {
-  companyName: string;
+  editInNoutId: number;
   accountID?: number;
   accountName?: string;
   accountNum?: string;
@@ -61,7 +70,7 @@ export interface IEditInNoutProps {
 
 //create INNOUT
 export interface ICreateAssetProps {
-  companyName: string;
+  companyId: number;
   enLId: string;
   enLName: string;
   enLType: string;
@@ -73,7 +82,7 @@ export interface ICreateAssetProps {
 
 //create Product
 export interface ICreateProduct {
-  companyName: string;
+  id: number;
   itemProductId: string;
   itemName: string;
   itemModelName?: string;
@@ -141,6 +150,53 @@ export interface IWorkersProps {
 
 //Create Vacation
 export interface ICreateVacation {
-  annual?: string;
+  other?: string;
   joinCompanyDate?: string;
+}
+export interface ICreateSalary {
+  id: number;
+  companyName: string;
+  familyCount: number;
+  preTaxMonthlySalary: number;
+  childCount: number;
+}
+
+export interface IVacationProps {
+  id: number;
+  joinCompanyDate: string;
+  annual: number;
+  other: number;
+  useAnnualVacation: number;
+  restVacation: number;
+}
+
+export interface ISalaryProps {
+  id: number;
+  preTaxMonthlySalary: number;
+  childCount: number;
+  annualSalary: number;
+  earnIncomeDedution: number;
+  earnIncomeAmount: number;
+  familyDedution: number;
+  pensionInsuranceDedution: number;
+  specialIncomeDedution: number;
+  taxBase: number;
+  taxCalculate: number;
+  taxDetermined: number;
+  earnIncomeTaxCredit: number;
+  simplifiedTax: number;
+  childTax: number;
+}
+export interface IEditVacation {
+  companyId: number;
+  vacationId: number;
+  joinCompanyDate?: string;
+  other?: number;
+}
+
+export interface ICreateVacationDescProps {
+  id: number;
+  day: number;
+  vacationType: TVacation;
+  description: string;
 }

@@ -6,11 +6,12 @@ import {
 } from "@apollo/client";
 import {IEditAssetProps} from "../../../../types/types";
 import {Mutation} from "../../../../libs/__generated__/graphql";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import {IParamID} from "../../../../types/routerType";
 
 const EDIT_ASSET_MUTATION = gql`
   mutation editEnL(
-    $companyName: String!
+    $editEnLId: Int!
     $enLId: String!
     $enLName: String
     $enLType: String
@@ -20,7 +21,7 @@ const EDIT_ASSET_MUTATION = gql`
     $value: Int
   ) {
     editEnL(
-      companyName: $companyName
+      id: $editEnLId
       enLId: $enLId
       enLName: $enLName
       enLType: $enLType
@@ -36,12 +37,12 @@ const EDIT_ASSET_MUTATION = gql`
 ` as DocumentNode | TypedDocumentNode<Mutation>;
 const useEditAssetMutate = () => {
   //hook
+  const param = useParams<keyof IParamID>();
   const navigate = useNavigate();
   //gql mutate
   const [editAsset, {loading, error}] = useMutation(EDIT_ASSET_MUTATION);
   const handleEditAsset = async ({
-    companyName,
-    inNoutId,
+    enlDescId,
     enLId,
     enLName,
     enLType,
@@ -52,7 +53,7 @@ const useEditAssetMutate = () => {
   }: IEditAssetProps) => {
     await editAsset({
       variables: {
-        companyName,
+        editEnLId: Number(param.id),
         enLId,
         enLName,
         enLType,
@@ -63,7 +64,7 @@ const useEditAssetMutate = () => {
       },
       update(cache, {data}) {
         if (data?.editEnL.ok) {
-          const id = `EquityLiabilities:${inNoutId}`;
+          const id = `EquityLiabilities:${enlDescId}`;
           cache.modify({
             id,
             fields: {
@@ -87,7 +88,7 @@ const useEditAssetMutate = () => {
               },
             },
           });
-          navigate(`/company/${companyName}/innout`);
+          navigate(`/company/${param.id}/innout`);
         }
       },
     });

@@ -8,11 +8,20 @@ export const CompanyInfoHeader = styled.div`
 `;
 export const CompanyInfoHeaderOne = styled.div`
   display: flex;
+  align-items: center;
+  gap: 20px;
+`;
+export const CInfoHeaderOneLeft = styled.div`
+  display: flex;
   flex-direction: column;
   p {
     text-align: left;
     margin-bottom: 10px;
   }
+`;
+export const CInfoHeaderOneRight = styled.div`
+  display: flex;
+  gap: 10px;
 `;
 export const CompanyInfoHeaderTwo = styled.div`
   display: flex;
@@ -46,7 +55,21 @@ export const UserDataCont = styled.div`
 export const CompanyAdressCont = styled.div`
   display: flex;
   justify-content: end;
+  align-items: center;
   gap: 10px;
   font-size: 11px;
-  min-width: 450px;
+  div {
+    white-space: nowrap;
+    small:first-child {
+      margin-right: 5px;
+    }
+  }
+  input {
+    color: ${(props) => props.theme.txtColor};
+    background-color: inherit;
+    border: none;
+    border-bottom: 1px solid ${(props) => props.theme.secondary};
+    min-width: 80px;
+    width: 100px;
+  }
 `;

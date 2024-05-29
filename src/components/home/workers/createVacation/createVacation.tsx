@@ -13,15 +13,15 @@ const CreateVacation = () => {
   const {handleCreateVacation} = useCreateVacation();
   const {handleSubmit, getValues} = useForm<ICreateVacation>({
     defaultValues: {
-      annual: "0",
+      other: "0",
       joinCompanyDate: "",
     },
   });
   //fn
   const onSubmit = () => {
-    const {annual, joinCompanyDate} = getValues();
+    const {other, joinCompanyDate} = getValues();
     handleCreateVacation({
-      annual,
+      other,
       joinCompanyDate,
     });
   };

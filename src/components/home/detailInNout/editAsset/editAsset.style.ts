@@ -30,14 +30,24 @@ export const EditAssetCont = styled.div`
   }
 `;
 export const EditAssetInputCont = styled.div`
+  gap: 5px;
   flex-direction: column;
-  gap: 10px;
   input {
     border: none;
     padding: 10px 20px;
     border-bottom: 1px solid ${(props) => props.theme.secondary};
   }
+  p {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
   span {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  small {
+    color: red;
     font-size: 12px;
   }
 `;

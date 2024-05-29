@@ -6,9 +6,22 @@ export const VACATION_FRAG = gql`
     createdAt
     updateAt
     joinCompanyDate
+    appearence
     annual
     other
-    useAnnualVacation
-    restVacation
+    restAnnualVacation
+    restOtherVacation
+    totalVacation
+  }
+`;
+
+export const VACATION_DESC_FRAG = gql`
+  fragment VacationDescFrag on VacationDesc {
+    id
+    createdAt
+    updateAt
+    vacationType
+    day
+    description
   }
 `;

@@ -11,7 +11,6 @@ import {IParamID} from "../../../types/routerType";
 
 const WorkersPage = ({worker}: IWorkersProps) => {
   const params = useParams<keyof IParamID>();
-
   return (
     <WorkerWrapper>
       <WorkerHeader>

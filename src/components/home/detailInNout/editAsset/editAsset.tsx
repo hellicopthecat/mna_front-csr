@@ -13,10 +13,11 @@ import {useForm} from "react-hook-form";
 import {IEditAssetProps} from "../../../../types/types";
 import useDeleteAssetHook from "./deleteAssetHook";
 import ModalWrapper from "../../../shareComp/modalWrapper";
+import {IParamID} from "../../../../types/routerType";
 
 const SEE_ENL_QUERY = gql`
-  query seeEnl($companyName: String!, $seeEnLId: Int!) {
-    seeEnL(companyName: $companyName, id: $seeEnLId) {
+  query seeEnl($seeEnLId: Int!) {
+    seeEnL(id: $seeEnLId) {
       id
       createdAt
       updateAt
@@ -36,11 +37,10 @@ const EditAsset = () => {
 
   //hooks
   const navigate = useNavigate();
-  const param = useParams();
+  const param = useParams<keyof IParamID>();
   //gql Query
   const {data, loading} = useQuery(SEE_ENL_QUERY, {
     variables: {
-      companyName: param?.id,
       seeEnLId: Number(param?.assetid),
     },
   });
@@ -49,7 +49,6 @@ const EditAsset = () => {
   const {register, handleSubmit, getValues, setValue} =
     useForm<IEditAssetProps>({
       defaultValues: {
-        companyName: param.id + "",
         enLId: ENL?.enLId as string,
         enLName: ENL?.enLName as string,
         enLType: ENL?.enLType as string,
@@ -66,11 +65,9 @@ const EditAsset = () => {
 
   //fn
   const onSubmit = () => {
-    const {companyName, enLName, enLType, enLDesc, current, assests, value} =
-      getValues();
+    const {enLName, enLType, enLDesc, current, assests, value} = getValues();
     handleEditAsset({
-      companyName,
-      inNoutId: Number(param?.inoutid),
+      enlDescId: Number(param.assetid),
       enLId: ENL?.enLId + "",
       enLName,
       enLType,
@@ -99,16 +96,9 @@ const EditAsset = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <legend>자산수정</legend>
             <EditAssetInputCont>
-              <label htmlFor="enlId">자산고유ID</label>
-              <input
-                {...register("enLId")}
-                id="enlId"
-                type="text"
-                value={ENL?.enLId}
-                placeholder={!ENL?.enLId ? "입력해주세요" : undefined}
-                disabled
-              />
-              <span>자산고유ID는 수정할수없습니다.</span>
+              <span>자산고유ID</span>
+              <small>자산고유ID는 수정할수없습니다.</small>
+              <p>{ENL?.enLId}</p>
             </EditAssetInputCont>
             <EditAssetInputCont>
               <label htmlFor="enlName">자산제목</label>

@@ -31,9 +31,3 @@ export const VCardBadge = styled.p<{$isvacation: boolean}>`
   place-self: end;
   font-size: 13px;
 `;
-export const VCardAnchor = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;

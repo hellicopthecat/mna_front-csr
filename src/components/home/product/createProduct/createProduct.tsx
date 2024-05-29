@@ -16,7 +16,7 @@ const CreateProduct = () => {
   const {register, handleSubmit, getValues, setValue} = useForm<ICreateProduct>(
     {
       defaultValues: {
-        companyName: param.id,
+        id: Number(param.id),
         itemProductId: "",
         itemName: "",
         itemModelName: "",
@@ -35,7 +35,7 @@ const CreateProduct = () => {
   //fn
   const onSubmit = () => {
     const {
-      companyName,
+      id,
       itemProductId,
       itemName,
       itemModelName,
@@ -49,9 +49,8 @@ const CreateProduct = () => {
       businessDesc,
       paymentsDone,
     } = getValues();
-
     handleCreateProduct({
-      companyName,
+      id,
       itemProductId,
       itemName,
       itemModelName,

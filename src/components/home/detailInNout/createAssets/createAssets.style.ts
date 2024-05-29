@@ -22,6 +22,7 @@ export const CreateAssetsForm = styled.form`
     display: flex;
     gap: 30px;
     label {
+      white-space: nowrap;
       width: 50%;
       span {
         color: red;

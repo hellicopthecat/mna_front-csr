@@ -17,8 +17,8 @@ import IncomeExpendTable, {
 
 //gql Query
 const DETAIL_INNOUT = gql`
-  query searchCompanyInNout($companyName: String!) {
-    searchCompany(companyName: $companyName) {
+  query searchCompanyInNout($searchCompanyId: Int!) {
+    searchCompany(id: $searchCompanyId) {
       companyInNout {
         ...CompanyInNoutFrag
         #
@@ -77,9 +77,9 @@ const DetailEveryInNout = () => {
   const {inNoutMode} = useAppSelector((state) => state.inNoutNav);
   const params = useParams();
   const {data, loading} = useQuery(DETAIL_INNOUT, {
-    variables: {companyName: params.id},
+    variables: {searchCompanyId: Number(params.id)},
   });
-  const INNOUT = data?.searchCompany.companyInNout;
+  const INNOUT = data?.searchCompany?.companyInNout;
   return (
     <DetialInNoutCont>
       {loading ? (

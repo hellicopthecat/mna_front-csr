@@ -1,6 +1,5 @@
 import {gql, useQuery} from "@apollo/client";
 import {USER_FRAG} from "../../../libs/fragments/userFrag";
-import {VACATION_FRAG} from "../../../libs/fragments/vacationFrag";
 import {DocumentNode} from "graphql";
 import {TypedDocumentNode} from "@graphql-typed-document-node/core";
 import {Query} from "../../../libs/__generated__/graphql";
@@ -15,33 +14,32 @@ import {
   WorkersPageWrapper,
 } from "./companyWorkers.style";
 import {AnchorTheme, BtnTheme} from "../../btnTheme";
-import {SALARY_FRAG} from "../../../libs/fragments/salaryFrag";
 
 const SEE_SELECTED_COMPANY = gql`
-  query seeCompanyWokers($companyName: String!) {
-    seeCompanyWorker(companyName: $companyName) {
+  query seeCompanyWorkers($seeCompanyWorkerId: Int!) {
+    seeCompanyWorker(id: $seeCompanyWorkerId) {
       ...UserFrag
       vacation {
-        ...VacationFrag
+        id
+        joinCompanyDate
+        totalVacation
         companyId
       }
       salary {
-        ...SalaryFrag
+        id
+        preTaxMonthlySalary
       }
     }
   }
   ${USER_FRAG}
-  ${VACATION_FRAG}
-  ${SALARY_FRAG}
 ` as DocumentNode | TypedDocumentNode<Query>;
 
 const CompanyWorkers = () => {
   const params = useParams<keyof IParamID>();
   const {data, error} = useQuery(SEE_SELECTED_COMPANY, {
-    variables: {companyName: params.id},
+    variables: {seeCompanyWorkerId: Number(params.id)},
   });
   const workers = data?.seeCompanyWorker;
-  console.log(workers);
   console.log(error);
   return (
     <WorkersPageWrapper>

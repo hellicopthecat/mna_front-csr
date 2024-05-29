@@ -8,11 +8,11 @@ import {Mutation} from "../../../../libs/__generated__/graphql";
 import {useNavigate} from "react-router-dom";
 interface IDeleteProduct {
   productId: number;
-  companyName: string;
+  companyId: number;
 }
 const DELETE_PRODUCT_MUTATE = gql`
-  mutation deleteProduct($companyName: String!, $deleteProductId: Int!) {
-    deleteProduct(companyName: $companyName, id: $deleteProductId) {
+  mutation deleteProduct($companyId: Int!, $productId: Int!) {
+    deleteProduct(companyId: $companyId, productId: $productId) {
       ok
       errorMsg
     }
@@ -23,10 +23,10 @@ const useDeleteProduct = () => {
   const [deleteProduct, {loading, error}] = useMutation(DELETE_PRODUCT_MUTATE);
   const handleDeleteProduct = async ({
     productId,
-    companyName,
+    companyId,
   }: IDeleteProduct) => {
     await deleteProduct({
-      variables: {deleteProductId: productId, companyName},
+      variables: {companyId, productId},
       update(cache) {
         cache.evict({id: `Product:${productId}`});
         cache.gc();
@@ -35,7 +35,7 @@ const useDeleteProduct = () => {
         if (!data.deleteProduct.ok) {
           alert(data.deleteProduct.errorMsg);
         }
-        navigate(`/company/${companyName}/product`);
+        navigate(`/company/${companyId}/product`);
       },
     });
   };

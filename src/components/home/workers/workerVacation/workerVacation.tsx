@@ -1,13 +1,13 @@
 import {useParams} from "react-router-dom";
-import {AnchorTheme, BtnTheme} from "../../../btnTheme";
+import {AnchorTheme} from "../../../btnTheme";
 import {IParamID} from "../../../../types/routerType";
 import React from "react";
 import {
-  VCardAnchor,
   VCardBadge,
   VCardInfo,
   WorkerVacationCard,
 } from "./workerVacation.style";
+import {joinCompanyDate} from "../../../../libs/util";
 
 export interface IWorkerVacationProps {
   workers?: {
@@ -21,19 +21,14 @@ export interface IWorkerVacationProps {
     vacation?: [
       {
         id: number;
+        totalVacation: number;
         joinCompanyDate: string;
-        annual: number;
-        other: number;
-        useAnnualVacation: number;
-        restVacation: number;
       }
     ];
     salary?: [
       {
         id: number;
-        beforeTaxMonthlySalary: number;
-        afterTaxMonthlySalary: number;
-        annualSalary: number;
+        preTaxMonthlySalary: number;
       }
     ];
   };
@@ -41,11 +36,6 @@ export interface IWorkerVacationProps {
 const WorkerVacation = ({workers}: IWorkerVacationProps) => {
   //hook
   const param = useParams<keyof IParamID>();
-
-  //fn
-  const joinCompanyDate = (date: string) =>
-    new Date(Number(date)).toLocaleString();
-
   return (
     <WorkerVacationCard>
       <VCardInfo>
@@ -73,6 +63,7 @@ const WorkerVacation = ({workers}: IWorkerVacationProps) => {
         <span>휴대전화</span>
         <p>{workers?.phone}</p>
       </VCardInfo>
+
       {workers?.vacation?.map((vacation) => (
         <React.Fragment key={vacation.id}>
           <VCardInfo>
@@ -80,48 +71,34 @@ const WorkerVacation = ({workers}: IWorkerVacationProps) => {
             <p>{joinCompanyDate(vacation?.joinCompanyDate)}</p>
           </VCardInfo>
           <VCardInfo>
-            <span>연차</span>
-            <p>{vacation.annual}</p>
+            <span>총 연차</span>
+            <p>{vacation.totalVacation}</p>
           </VCardInfo>
+          <AnchorTheme
+            href={`/company/${param.id}/workers/${workers?.id}/detail-vacation/${vacation.id}`}
+            text="연차보기"
+            width="70px"
+            height="30px"
+            fontSize="14px"
+          />
         </React.Fragment>
       ))}
       {workers?.salary?.map((salary) => (
         <React.Fragment key={salary.id}>
           <VCardInfo>
-            <span>급여</span>
-            <p>{salary.annualSalary}</p>
+            <span>월급</span>
+            <p>{salary.preTaxMonthlySalary.toLocaleString()} 원</p>
           </VCardInfo>
-          <VCardInfo>
-            <span>세후</span>
-            <p>{salary.afterTaxMonthlySalary}</p>
-          </VCardInfo>
-          <VCardInfo>
-            <span>세전</span>
-            <p>{salary.beforeTaxMonthlySalary}</p>
-          </VCardInfo>
+          <AnchorTheme
+            href={`/company/${param.id}/workers/${workers?.id}/detail-salary/${salary.id}`}
+            text="급여보기"
+            width="70px"
+            height="30px"
+            fontSize="14px"
+          />
         </React.Fragment>
       ))}
       <VCardInfo>
-        {workers?.vacation && workers?.vacation?.length > 0 && (
-          <AnchorTheme
-            href="/"
-            text="연차수정"
-            width="70px"
-            height="30px"
-            fontSize="14px"
-          />
-        )}
-        {workers?.salary && workers?.salary?.length > 0 && (
-          <AnchorTheme
-            href="/"
-            text="급여수정"
-            width="70px"
-            height="30px"
-            fontSize="14px"
-          />
-        )}
-      </VCardInfo>
-      <VCardAnchor>
         {workers?.vacation && workers?.vacation?.length < 1 && (
           <AnchorTheme
             href={`/company/${param.id}/workers/${workers.id}/create-vacation`}
@@ -140,7 +117,7 @@ const WorkerVacation = ({workers}: IWorkerVacationProps) => {
             fontSize="14px"
           />
         )}
-      </VCardAnchor>
+      </VCardInfo>
     </WorkerVacationCard>
   );
 };

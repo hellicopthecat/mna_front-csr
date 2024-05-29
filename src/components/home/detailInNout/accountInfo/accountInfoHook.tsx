@@ -9,13 +9,13 @@ import {Mutation} from "../../../../libs/__generated__/graphql";
 
 const EDIT_INNOUT_MUTATE = gql`
   mutation editInNout(
-    $companyName: String!
+    $editInNoutId: Int!
     $accountNum: String
     $accountName: String
     $accountDesc: String
   ) {
     editInNout(
-      companyName: $companyName
+      id: $editInNoutId
       accountNum: $accountNum
       accountName: $accountName
       accountDesc: $accountDesc
@@ -28,8 +28,8 @@ const EDIT_INNOUT_MUTATE = gql`
 const useAccountInfoEditMutate = () => {
   const [editInNout, {loading}] = useMutation(EDIT_INNOUT_MUTATE);
   const handleEditInNout = async ({
+    editInNoutId,
     accountID,
-    companyName,
     accountDesc,
     accountName,
     accountNum,
@@ -39,7 +39,7 @@ const useAccountInfoEditMutate = () => {
     }
     await editInNout({
       variables: {
-        companyName,
+        editInNoutId,
         accountDesc,
         accountName,
         accountNum,

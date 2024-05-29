@@ -3,17 +3,16 @@ import {
   TypedDocumentNode,
   gql,
   useMutation,
-  useQuery,
 } from "@apollo/client";
 import {ICreateProduct} from "../../../../types/types";
 import {useNavigate, useParams} from "react-router-dom";
-import {Mutation, Query} from "../../../../libs/__generated__/graphql";
-import {PRODUCT_FRAG} from "../../../../libs/fragments/productFrag";
+import {Mutation} from "../../../../libs/__generated__/graphql";
+import {IParamID} from "../../../../types/routerType";
 const CREATE_PRODUCT_MUTATE = gql`
-  mutation Mutation(
+  mutation createProduct(
     $itemProductId: String!
     $itemName: String!
-    $companyName: String!
+    $createProductId: Int!
     $paymentsDone: TPaymentSwitch
     $itemModelName: String
     $itemPhoto: String
@@ -29,7 +28,7 @@ const CREATE_PRODUCT_MUTATE = gql`
     createProduct(
       itemProductId: $itemProductId
       itemName: $itemName
-      companyName: $companyName
+      id: $createProductId
       paymentsDone: $paymentsDone
       itemModelName: $itemModelName
       itemPhoto: $itemPhoto
@@ -43,30 +42,19 @@ const CREATE_PRODUCT_MUTATE = gql`
       businessDesc: $businessDesc
     ) {
       ok
+      id
       errorMsg
     }
   }
 ` as DocumentNode | TypedDocumentNode<Mutation>;
-const DETAIL_PRODUCT = gql`
-  query CompanyInNout($companyName: String!) {
-    searchCompany(companyName: $companyName) {
-      id
-      companyProduct {
-        ...ProductFrag
-      }
-    }
-  }
-  ${PRODUCT_FRAG}
-` as DocumentNode | TypedDocumentNode<Query>;
+
 const useCreateProductMutate = () => {
   const navigate = useNavigate();
-  const params = useParams();
+  const params = useParams<keyof IParamID>();
   const [createProduct, {loading, error}] = useMutation(CREATE_PRODUCT_MUTATE);
-  const {data: QueryData} = useQuery(DETAIL_PRODUCT, {
-    variables: {companyName: params.id},
-  });
+
   const handleCreateProduct = async ({
-    companyName,
+    id,
     itemProductId,
     itemName,
     itemModelName,
@@ -85,7 +73,7 @@ const useCreateProductMutate = () => {
     }
     await createProduct({
       variables: {
-        companyName,
+        createProductId: id,
         itemProductId,
         itemName,
         itemModelName,
@@ -103,7 +91,7 @@ const useCreateProductMutate = () => {
         if (data?.createProduct.ok) {
           const newObj = {
             __typename: "Product",
-            id: "NEW",
+            id: `Product:${data.createProduct.id}`,
             itemName,
             itemCount,
             itemProductId,
@@ -113,7 +101,7 @@ const useCreateProductMutate = () => {
             itemType,
           };
           cache.modify({
-            id: `Company:${QueryData?.searchCompany.id}`,
+            id: `Company:${id}`,
             fields: {
               companyProduct(prev) {
                 return [newObj, ...prev];

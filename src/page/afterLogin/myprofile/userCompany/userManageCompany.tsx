@@ -39,19 +39,15 @@ const UserManageCompany = () => {
       ) : (
         <MyprofileLayout>
           <UserCompanyHeader>
-            <h2>내가 보유하고 있는 회사</h2>
-            <span>{userCompany?.manageCompanyCount}</span>
+            <h2>내가 관리하는 회사</h2>
+            <span>({userCompany?.manageCompanyCount} 개)</span>
           </UserCompanyHeader>
           <UserCompanyBodyWrapper>
             <UserCompanyBody>
               {userCompany?.manageCompany?.map((company) => (
                 <UserCompanyCard key={company?.id}>
-                  <Link to={`/company/${company?.companyName}`}>
-                    <h3
-                      onClick={() =>
-                        dispatch(saveCompanyName(company?.companyName))
-                      }
-                    >
+                  <Link to={`/company/${company?.id}`}>
+                    <h3 onClick={() => dispatch(saveCompanyName(company?.id))}>
                       {company && company?.companyName.length > 10
                         ? `${company?.companyName.slice(0, 10)}...`
                         : company?.companyName}
@@ -77,7 +73,10 @@ const UserManageCompany = () => {
                 </UserCompanyCard>
               ))}
             </UserCompanyBody>
-            <BtnTheme text="더보기" width="80px" fontSize="16px" />
+            {userCompany?.manageCompany &&
+              userCompany.manageCompany.length > 7 && (
+                <BtnTheme text="더보기" width="80px" fontSize="16px" center />
+              )}
           </UserCompanyBodyWrapper>
         </MyprofileLayout>
       )}

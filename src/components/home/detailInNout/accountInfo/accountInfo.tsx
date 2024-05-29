@@ -34,7 +34,7 @@ const AccountInfo = ({
   const {register, getValues, handleSubmit} = useForm<IEditInNoutProps>({
     defaultValues: {
       accountID,
-      companyName: params.id,
+      editInNoutId: Number(params.id),
       accountName,
       accountNum,
       accountDesc,
@@ -44,11 +44,11 @@ const AccountInfo = ({
   const handleEditMode = () => setEdit(true);
   const handleNomalMode = () => setEdit(false);
   const handleEdit = () => {
-    const {accountID, companyName, accountDesc, accountName, accountNum} =
+    const {accountID, editInNoutId, accountDesc, accountName, accountNum} =
       getValues();
     handleEditInNout({
       accountID,
-      companyName,
+      editInNoutId,
       accountDesc,
       accountName,
       accountNum,

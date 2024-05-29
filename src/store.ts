@@ -5,6 +5,7 @@ import themeTypeSlice from "./redux/themeSlice";
 import activeNavSlice from "./redux/navSlice";
 import companyStateSlice from "./redux/companyStateSlice";
 import inNoutNavStateSlice from "./redux/inNoutNavStateSlice";
+import searchCompanySlice from "./redux/searchCompanySlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     activeNav: activeNavSlice,
     companyState: companyStateSlice,
     inNoutNav: inNoutNavStateSlice,
+    searchCompanyName: searchCompanySlice,
   },
 });
 

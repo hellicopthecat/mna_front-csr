@@ -1,6 +1,6 @@
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import styled from "styled-components";
-import {useAppSelector} from "../../../hooks/storeHook";
+import {IParamID} from "../../../types/routerType";
 
 export interface IInNoutProps {
   inNout?: {
@@ -40,59 +40,75 @@ const InNoutInfoCont = styled.div`
   border: 1px solid ${(props) => props.theme.cardColor};
   border-radius: 10px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
-  span:first-child {
-  }
   span:nth-child(2) {
     text-align: right;
   }
 `;
 const CompanyInNout = ({inNout}: IInNoutProps) => {
-  const {companyName} = useAppSelector((state) => state.companyState);
+  const param = useParams<keyof IParamID>();
   return (
     <>
       <CompanyInNoutTitle>
         <h2>회계</h2>
-        <Link to={`/company/${companyName}/innout`}>
-          <span>전체보기</span>
-        </Link>
+        <Link to={`/company/${param.id}/innout`}>전체보기</Link>
       </CompanyInNoutTitle>
       <InNoutWrapper>
         <InNoutInfoCont>
           <span>예산</span>
-          <span>{inNout?.budget}</span>
+          <span>
+            {!inNout?.budget ? 0 : inNout?.budget.toLocaleString()} 원
+          </span>
         </InNoutInfoCont>
         <InNoutInfoCont>
           <span>총자산</span>
-          <span>{inNout?.totalAssets}</span>
+          <span>
+            {!inNout?.totalAssets ? 0 : inNout?.totalAssets.toLocaleString()} 원
+          </span>
         </InNoutInfoCont>
         <InNoutInfoCont>
           <span>자본</span>
-          <span>{inNout?.capital}</span>
+          <span>
+            {!inNout?.capital ? 0 : inNout?.capital.toLocaleString()} 원
+          </span>
         </InNoutInfoCont>
         <InNoutInfoCont>
           <span>부채</span>
-          <span>{inNout?.liabilities}</span>
+          <span>
+            {!inNout?.liabilities ? 0 : inNout?.liabilities.toLocaleString()} 원
+          </span>
         </InNoutInfoCont>
         <InNoutInfoCont>
           <span>총수익</span>
-          <span>{inNout?.totalRevenue}</span>
+          <span>
+            {!inNout?.totalRevenue ? 0 : inNout?.totalRevenue.toLocaleString()}{" "}
+            원
+          </span>
         </InNoutInfoCont>
         <InNoutInfoCont>
           <span>총비용</span>
-          <span>{inNout?.totalExpenses}</span>
+          <span>
+            {!inNout?.totalExpenses
+              ? 0
+              : inNout?.totalExpenses.toLocaleString()}{" "}
+            원
+          </span>
         </InNoutInfoCont>
         <InNoutInfoCont>
           <span>순자산</span>
-          <span>{inNout?.netAssets}</span>
+          <span>
+            {!inNout?.netAssets ? 0 : inNout?.netAssets.toLocaleString()} 원
+          </span>
         </InNoutInfoCont>
         <InNoutInfoCont>
           <span>순이익</span>
-          <span>{inNout?.netIncome}</span>
+          <span>
+            {!inNout?.netIncome ? 0 : inNout?.netIncome.toLocaleString()} 원
+          </span>
         </InNoutInfoCont>
         <InNoutInfoCont>
           <span>부채비율</span>
           <span>
-            {inNout?.debtRatio === null
+            {!inNout?.debtRatio
               ? "자산/부채 모델이 없습니다."
               : `${inNout?.debtRatio?.toLocaleString()}%`}
           </span>
@@ -100,7 +116,7 @@ const CompanyInNout = ({inNout}: IInNoutProps) => {
         <InNoutInfoCont>
           <span>자기자본비율</span>
           <span>
-            {inNout?.equityRatio === null
+            {!inNout?.equityRatio
               ? "자산/부채 모델이 없습니다."
               : `${inNout?.equityRatio?.toLocaleString()}%`}
           </span>
@@ -108,7 +124,7 @@ const CompanyInNout = ({inNout}: IInNoutProps) => {
         <InNoutInfoCont>
           <span>이익률</span>
           <span>
-            {inNout?.profitMargin === null
+            {!inNout?.profitMargin
               ? "수익 모델이 없습니다."
               : `${inNout?.profitMargin?.toLocaleString()}%`}
           </span>
@@ -116,7 +132,7 @@ const CompanyInNout = ({inNout}: IInNoutProps) => {
         <InNoutInfoCont>
           <span>자기자본회수기간</span>
           <span>
-            {inNout?.roe === null
+            {!inNout?.roe
               ? "수익 모델이 없습니다."
               : `${inNout?.roe?.toLocaleString()}%`}
           </span>

@@ -45,6 +45,7 @@ export const MyProfileNavAnchor = styled.li<{$path: boolean}>`
     font-size: 20px;
     font-weight: 600;
     text-underline-offset: 4px;
+    white-space: nowrap;
   }
 `;
 export const MyProfileRight = styled.div`

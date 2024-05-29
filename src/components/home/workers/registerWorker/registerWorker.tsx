@@ -23,7 +23,7 @@ const RegisterWorker = () => {
     const {username} = getValues();
     handleRegistWorker({
       username,
-      companyName: param.id + "",
+      companyId: Number(param.id),
     });
   };
   const goBack = () => navigate(`/company/${param.id}/workers`);

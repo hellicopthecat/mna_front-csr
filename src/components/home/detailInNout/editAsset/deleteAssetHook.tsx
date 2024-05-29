@@ -6,6 +6,7 @@ import {
 } from "@apollo/client";
 import {Mutation, Query} from "../../../../libs/__generated__/graphql";
 import {useNavigate, useParams} from "react-router-dom";
+import {IParamID} from "../../../../types/routerType";
 
 const DELETE_ASSET_MUTATE = gql`
   mutation deleteEnl($enLId: String!) {
@@ -17,7 +18,7 @@ const DELETE_ASSET_MUTATE = gql`
 ` as DocumentNode | TypedDocumentNode<Mutation>;
 const useDeleteAssetHook = () => {
   const navigate = useNavigate();
-  const params = useParams();
+  const params = useParams<keyof IParamID>();
   const [deleteAssets, {loading}] = useMutation(DELETE_ASSET_MUTATE);
   const handleDeleteAssets = async ({
     enLId,
