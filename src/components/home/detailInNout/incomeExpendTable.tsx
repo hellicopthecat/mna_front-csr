@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import {BtnTheme} from "../../btnTheme";
+import {AnchorTheme} from "../../btnTheme";
+import {useParams} from "react-router-dom";
+import {IParamID} from "../../../types/routerType";
 
 export interface IIncomeExpendProps {
   title: string;
@@ -45,6 +47,7 @@ const INETableTfoot = styled.tfoot`
   text-align: center;
 `;
 const IncomeExpendTable = ({title, total, iNe}: IIncomeExpendProps) => {
+  const param = useParams<keyof IParamID>();
   return (
     <INETableCont>
       <h3>{title}</h3>
@@ -66,15 +69,16 @@ const IncomeExpendTable = ({title, total, iNe}: IIncomeExpendProps) => {
           {iNe?.map((item) => (
             <tr key={item.id}>
               <td>{item.id}</td>
-              <td>{item.infoSubtitle}</td>
-              <td>{item.businessDate}</td>
-              <td>{item.incomeTrue}</td>
-              <td>{item.paymentType}</td>
-              <td>{item.accountCode}</td>
+              <td>{!item.infoSubtitle ? "미기입" : item.infoSubtitle}</td>
+              <td>{!item.businessDate ? "미기입" : item.businessDate}</td>
+              <td>{!item.incomeTrue ? "지출" : "수입"}</td>
+              <td>{!item.paymentType ? "미기입" : item.paymentType}</td>
+              <td>{!item.accountCode ? "미기입" : item.accountCode}</td>
               <td>{!item.money ? 0 : `₩ ${item.money.toLocaleString()}`}</td>
               <td>{item.paymentsDone}</td>
               <td style={{display: "flex", justifyContent: "center"}}>
-                <BtnTheme
+                <AnchorTheme
+                  href={`/company/${param.id}/product/${item.id}`}
                   text="편집"
                   width="45px"
                   height="20px"

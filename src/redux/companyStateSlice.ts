@@ -13,6 +13,7 @@ const companyStateSlice = createSlice({
       sessionStorage.setItem(COMPANY_ID, id);
       sessionStorage.setItem(COMPANY_NAME, name);
       state.companyName = sessionStorage.getItem(COMPANY_NAME);
+      state.companyId = sessionStorage.getItem(COMPANY_ID);
     },
   },
 });

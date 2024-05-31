@@ -20,11 +20,11 @@ const HeaderComp = () => {
   const {data} = useUser();
   const user = data?.seeMyprofile;
   //redux
+  const dispatch = useAppDispatch();
   const {theme} = useAppSelector((state) => state.theme);
   const {companyId, companyName} = useAppSelector(
     (state) => state.companyState
   );
-  const dispatch = useAppDispatch();
   return (
     <HeaderWrapper>
       <HeaderLeft>

@@ -113,7 +113,6 @@ const useCreateProductMutate = () => {
       onCompleted({createProduct}) {
         if (!createProduct.ok) {
           alert(createProduct.errorMsg);
-          return null;
         }
         navigate(`/company/${params.id}/product`);
       },

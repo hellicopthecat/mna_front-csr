@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const HeaderWrapper = styled.header`
   position: sticky;
+  z-index: 99;
   top: 0;
   left: 0;
   height: 100px;

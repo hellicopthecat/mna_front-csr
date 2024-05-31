@@ -92,7 +92,6 @@ const CompanyInfo = ({
   };
   //constants
   const manager = isOwned || isManager;
-
   const existsCompany = connectingCompany?.find(
     (item) => item.companyName !== companyName
   );

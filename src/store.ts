@@ -15,7 +15,7 @@ const store = configureStore({
     activeNav: activeNavSlice,
     companyState: companyStateSlice,
     inNoutNav: inNoutNavStateSlice,
-    searchCompanyName: searchCompanySlice,
+    searchCompany: searchCompanySlice,
   },
 });
 

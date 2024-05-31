@@ -74,8 +74,13 @@ const DetailCompany = () => {
     variables: {searchCompanyId: Number(param.id)},
   });
   const C_DATA = data?.searchCompany;
+
   if (!C_DATA) {
-    return <div>검색하신 회사는 존재하지 않습니다.</div>;
+    return (
+      <div>
+        <p>회사가 존재하지 않습니다.</p>
+      </div>
+    );
   }
   return (
     <HomeWrapper>
@@ -97,7 +102,7 @@ const DetailCompany = () => {
               C_DATA?.connectedCompany as ICompanyInfo["connectedCompany"]
             }
             connectingCompany={
-              C_DATA.connectingCompany as ICompanyInfo["connectingCompany"]
+              C_DATA?.connectingCompany as ICompanyInfo["connectingCompany"]
             }
           />
 

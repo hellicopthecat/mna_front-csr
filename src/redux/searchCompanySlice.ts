@@ -2,6 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
   searchCompanyName: "",
+  searchMode: false,
 };
 export const searchCompanySlice = createSlice({
   name: "searchCompany",
@@ -10,7 +11,10 @@ export const searchCompanySlice = createSlice({
     insertCompanyName: (state, {payload}: {payload: string}) => {
       state.searchCompanyName = payload + "";
     },
+    setSearchMode: (state) => {
+      state.searchMode = !state.searchMode;
+    },
   },
 });
-export const {insertCompanyName} = searchCompanySlice.actions;
+export const {insertCompanyName, setSearchMode} = searchCompanySlice.actions;
 export default searchCompanySlice.reducer;

@@ -46,13 +46,20 @@ const DETAIL_INNOUT = gql`
         nonCurrentLiabilitiesDesc {
           ...EquityLiabilitiesFrag
         }
-
         incomeMoney
         incomeModel {
           ...IncomeExpendFrag
         }
         expendMoney
         expendModel {
+          ...IncomeExpendFrag
+        }
+        waitIncomeMoney
+        waitIncomeModel {
+          ...IncomeExpendFrag
+        }
+        waitExpendMoney
+        waitExpendModel {
           ...IncomeExpendFrag
         }
       }
@@ -147,6 +154,20 @@ const DetailEveryInNout = () => {
               title="지출모델"
               total={INNOUT?.expendMoney as number}
               iNe={INNOUT?.expendModel as IIncomeExpendProps["iNe"]}
+            />
+          )}
+          {inNoutMode === 8 && (
+            <IncomeExpendTable
+              title="수입대기모델"
+              total={INNOUT?.waitIncomeMoney as number}
+              iNe={INNOUT?.waitIncomeModel as IIncomeExpendProps["iNe"]}
+            />
+          )}
+          {inNoutMode === 9 && (
+            <IncomeExpendTable
+              title="지출대기모델"
+              total={INNOUT?.waitExpendMoney as number}
+              iNe={INNOUT?.waitExpendModel as IIncomeExpendProps["iNe"]}
             />
           )}
         </>
