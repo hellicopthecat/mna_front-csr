@@ -50,7 +50,7 @@ const SEE_SELECTED_COMPANY = gql`
         companyLogo
       }
       connectingCompanyCount
-      companyInNout {
+      inNout {
         ...CompanyInNoutFrag
       }
       companyProduct {
@@ -107,7 +107,7 @@ const DetailCompany = () => {
           />
 
           <CompanyInfoWrapper>
-            <CompanyInNout inNout={C_DATA?.companyInNout as object} />
+            <CompanyInNout inNout={C_DATA?.inNout as object} />
           </CompanyInfoWrapper>
 
           <CompanyInfoWrapper>

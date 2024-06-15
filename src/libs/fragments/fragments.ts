@@ -19,7 +19,7 @@ export const CONNECTCOMPANY_FRAG = gql`
       companyName
     }
     connectingCompanyCount
-    companyInNout {
+    inNout {
       id
       accountNum
       budget
