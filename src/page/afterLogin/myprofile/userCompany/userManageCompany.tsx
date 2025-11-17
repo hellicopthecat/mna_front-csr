@@ -55,15 +55,15 @@ const UserManageCompany = () => {
                   </Link>
                   <UserCompanyCardInfo
                     keyword="계좌번호"
-                    value={company?.companyInNout.accountNum ?? "미기입"}
+                    value={company?.inNout.accountNum ?? "미기입"}
                   />
                   <UserCompanyCardInfo
                     keyword="예산"
-                    value={company?.companyInNout.budget}
+                    value={company?.inNout.budget}
                   />
                   <UserCompanyCardInfo
                     keyword="총자산"
-                    value={company?.companyInNout.totalAssets}
+                    value={company?.inNout.totalAssets}
                   />
 
                   <UserCompanyBadge

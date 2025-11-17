@@ -91,7 +91,7 @@ const useCreateProductMutate = () => {
         if (data?.createProduct.ok) {
           const newObj = {
             __typename: "Product",
-            id: `Product:${data.createProduct.id}`,
+            id: data.createProduct.id,
             itemName,
             itemCount,
             itemProductId,
